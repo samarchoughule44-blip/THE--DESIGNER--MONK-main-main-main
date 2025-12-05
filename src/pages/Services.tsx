@@ -3,6 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Home, UtensilsCrossed, Sofa, Bed, Armchair, Wrench, CheckCircle2, X } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
+import { 
+  dsc06643,
+  dsc06676,
+  dsc06716,
+  dsc06725,
+  dsc06769,
+  dsc06781
+} from "@/assets";
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState('delivered');
@@ -19,7 +27,7 @@ const Services = () => {
       convenience: "Convenience Max",
       layout: "Parallel",
       area: "Sector 76, Noida, UP",
-      image: "/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg",
+      image: dsc06643,
       pricing: "30+",
       bhk: "3-BHK",
       scope: "Full Home, Kitchen, Living Room, Dining Room, 3 Bedrooms",
@@ -34,7 +42,7 @@ const Services = () => {
       convenience: "Smart Storage",
       layout: "L-Shaped",
       area: "Shivaji Nagar, Pune",
-      image: "/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg",
+      image: dsc06676,
       pricing: "25+",
       bhk: "2-BHK",
       scope: "Kitchen, Living Room, 2 Bedrooms",
@@ -49,7 +57,7 @@ const Services = () => {
       convenience: "Luxury Max",
       layout: "Suite Style",
       area: "Whitefield, Bangalore",
-      image: "/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg",
+      image: dsc06716,
       pricing: "20+",
       bhk: "3-BHK",
       scope: "Master Bedroom, Wardrobe, Bathroom",
@@ -64,7 +72,7 @@ const Services = () => {
       convenience: "Premium",
       layout: "Open Dining",
       area: "Powai, Mumbai",
-      image: "/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg",
+      image: dsc06725,
       pricing: "15+",
       bhk: "2-BHK",
       scope: "Dining Room, Living Extension",
@@ -82,7 +90,7 @@ const Services = () => {
       convenience: "Premium Max",
       layout: "Open Plan",
       area: "Gurgaon, Haryana",
-      image: "/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg",
+      image: dsc06769,
       pricing: "50+",
       bhk: "4-BHK",
       scope: "Full Villa, All Rooms, Garden Area",
@@ -97,7 +105,7 @@ const Services = () => {
       convenience: "Smart Home",
       layout: "Duplex",
       area: "Lower Parel, Mumbai",
-      image: "/src/assets/Compress-images/DSC06781-HDR_18_11zon.jpg",
+      image: dsc06781,
       pricing: "80+",
       bhk: "5-BHK",
       scope: "Full Penthouse, Terrace, Home Theater",

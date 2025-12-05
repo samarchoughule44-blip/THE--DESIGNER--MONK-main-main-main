@@ -1,6 +1,18 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { 
+  dsc06643,
+  dsc06676,
+  dsc06716,
+  dsc06725,
+  dsc06769,
+  dsc06781,
+  dsc06788,
+  dsc06796,
+  dsc06807,
+  dsc06818
+} from "@/assets";
 
 const ImageGallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -12,57 +24,57 @@ const ImageGallery = () => {
     1: {
       title: "4BHK Flat - Mumbai, Borivali",
       images: [
-        "/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg",
-        "/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg",
-        "/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg"
+        dsc06643,
+        dsc06676,
+        dsc06716
       ]
     },
     2: {
       title: "2BHK Flat - Pune, Shivaji Nagar",
       images: [
-        "/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg",
-        "/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg",
-        "/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg"
+        dsc06676,
+        dsc06725,
+        dsc06769
       ]
     },
     3: {
       title: "Master Bedroom - Elegant & Cozy",
       images: [
-        "/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg",
-        "/src/assets/Compress-images/DSC06781-HDR_18_11zon.jpg",
-        "/src/assets/Compress-images/DSC06788-HDR_17_11zon.jpg"
+        dsc06716,
+        dsc06781,
+        dsc06788
       ]
     },
     4: {
       title: "Dining Area - Sophisticated Style",
       images: [
-        "/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg",
-        "/src/assets/Compress-images/DSC06796-HDR_14_11zon.jpg",
-        "/src/assets/Compress-images/DSC06807-HDR_16_11zon.jpg"
+        dsc06725,
+        dsc06796,
+        dsc06807
       ]
     },
     5: {
       title: "Home Office - Productive Workspace",
       images: [
-        "/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg",
-        "/src/assets/Compress-images/DSC06818-HDR_5_11zon.jpg",
-        "/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg"
+        dsc06769,
+        dsc06818,
+        dsc06643
       ]
     }
   };
 
   const currentProject = projectId ? projectData[projectId] : null;
   const images = currentProject ? currentProject.images : [
-    "/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg",
-    "/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg",
-    "/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg",
-    "/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg",
-    "/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg",
-    "/src/assets/Compress-images/DSC06781-HDR_18_11zon.jpg",
-    "/src/assets/Compress-images/DSC06788-HDR_17_11zon.jpg",
-    "/src/assets/Compress-images/DSC06796-HDR_14_11zon.jpg",
-    "/src/assets/Compress-images/DSC06807-HDR_16_11zon.jpg",
-    "/src/assets/Compress-images/DSC06818-HDR_5_11zon.jpg"
+    dsc06643,
+    dsc06676,
+    dsc06716,
+    dsc06725,
+    dsc06769,
+    dsc06781,
+    dsc06788,
+    dsc06796,
+    dsc06807,
+    dsc06818
   ];
 
   const openModal = (image: string) => setSelectedImage(image);

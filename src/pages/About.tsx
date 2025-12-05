@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { useEffect } from "react";
+import { professionalImage, teamImage } from "@/assets";
 
 const About = () => {
   useEffect(() => {
@@ -97,7 +98,7 @@ const About = () => {
             <div className="lg:col-span-9 move-up">
               <div className="mb-8">
                 <img 
-                  src="/src/assets/Compress-images/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background.jpg" 
+                  src={professionalImage} 
                   alt="Swapnil Kadam" 
                   className="w-full rounded-2xl object-cover"
                 />
@@ -123,7 +124,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="move-up mb-8">
             <img 
-              src="/src/assets/Compress-images/compressed_group-people-working-out-business-plan-office (1).jpg" 
+              src={teamImage} 
               alt="The Designer Monk Team" 
               className="w-full rounded-2xl object-cover"
             />

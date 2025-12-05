@@ -2,10 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import kitchenImage from "@/assets/kitchen.jpg";
-import livingRoomImage from "@/assets/living-room.jpg";
-import bedroomImage from "@/assets/bedroom.jpg";
-import wardrobeImage from "@/assets/wardrobe.jpg";
+import { kitchenImage, livingRoomImage, bedroomImage, wardrobeImage } from "@/assets";
 
 type ProjectCategory =
   | "All"

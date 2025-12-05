@@ -3,11 +3,25 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle2, Users, Award, Clock, Shield, Quote, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import heroImage from "@/assets/hero-home.jpg";
-import kitchenImage from "@/assets/kitchen.jpg";
-import livingRoomImage from "@/assets/living-room.jpg";
-import bedroomImage from "@/assets/bedroom.jpg";
-import wardrobeImage from "@/assets/wardrobe.jpg";
+import { 
+  heroImage, 
+  kitchenImage, 
+  livingRoomImage, 
+  bedroomImage, 
+  wardrobeImage,
+  backgroundImage,
+  dsc06643,
+  dsc06676,
+  dsc06716,
+  dsc06725,
+  dsc06769,
+  dsc06781,
+  dsc06788,
+  dsc06796,
+  dsc06807,
+  dsc06818,
+  professionalImage
+} from "@/assets";
 
 
 
@@ -83,55 +97,55 @@ const Home = () => {
       id: 1,
       title: "4BHK Flat",
       location: "Mumbai, Borivali",
-      image: "/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg",
+      image: dsc06643,
       images: [
-        "/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg",
-        "/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg",
-        "/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg"
+        dsc06643,
+        dsc06676,
+        dsc06716
       ]
     },
     {
       id: 2,
       title: "2BHK Flat",
       location: "Pune, Shivaji Nagar",
-      image: "/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg",
+      image: dsc06676,
       images: [
-        "/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg",
-        "/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg",
-        "/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg"
+        dsc06676,
+        dsc06725,
+        dsc06769
       ]
     },
     {
       id: 3,
       title: "Elegant Bedroom",
       location: "Elegant & Cozy",
-      image: "/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg",
+      image: dsc06716,
       images: [
-        "/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg",
-        "/src/assets/Compress-images/DSC06781-HDR_18_11zon.jpg",
-        "/src/assets/Compress-images/DSC06788-HDR_17_11zon.jpg"
+        dsc06716,
+        dsc06781,
+        dsc06788
       ]
     },
     {
       id: 4,
       title: "Dining Area",
       location: "Sophisticated Style",
-      image: "/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg",
+      image: dsc06725,
       images: [
-        "/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg",
-        "/src/assets/Compress-images/DSC06796-HDR_14_11zon.jpg",
-        "/src/assets/Compress-images/DSC06807-HDR_16_11zon.jpg"
+        dsc06725,
+        dsc06796,
+        dsc06807
       ]
     },
     {
       id: 5,
       title: "Oberio Skycity",
       location: "Delhi, karolbaug",
-      image: "/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg",
+      image: dsc06769,
       images: [
-        "/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg",
-        "/src/assets/Compress-images/DSC06818-HDR_5_11zon.jpg",
-        "/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg"
+        dsc06769,
+        dsc06818,
+        dsc06643
       ]
     }
   ];
@@ -379,7 +393,7 @@ const Home = () => {
     {/* FIRST ROW */}
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
       <img onClick={() => navigate('/services')}
-       src="/src/assets/Compress-images/DSC06643-HDR_3_11zon.jpg" className="w-full h-full object-cover" />
+       src={dsc06643} className="w-full h-full object-cover" />
 
       <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
         Master Bedroom
@@ -387,7 +401,7 @@ const Home = () => {
     </div>
 
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
-      <img onClick={() => navigate('/services')} src="/src/assets/Compress-images/DSC06676-HDR_4_11zon.jpg" className="w-full h-full object-cover" />
+      <img onClick={() => navigate('/services')} src={dsc06676} className="w-full h-full object-cover" />
 
       <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
         False Ceiling
@@ -395,7 +409,7 @@ const Home = () => {
     </div>
 
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
-      <img onClick={() => navigate('/services')} src="/src/assets/Compress-images/DSC06716-HDR_4_11zon.jpg" className="w-full h-full object-cover" />
+      <img onClick={() => navigate('/services')} src={dsc06716} className="w-full h-full object-cover" />
 
       <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
         Home Office
@@ -403,7 +417,7 @@ const Home = () => {
     </div>
 
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
-      <img onClick={() => navigate('/services')} src="/src/assets/Compress-images/DSC06725-HDR_5_11zon.jpg" className="w-full h-full object-cover" />
+      <img onClick={() => navigate('/services')} src={dsc06725} className="w-full h-full object-cover" />
 
       <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
         Foyer Room
@@ -413,7 +427,7 @@ const Home = () => {
     {/* SECOND ROW */}
     <div className="col-span-4 flex gap-3">
       <div className="w-[420px] h-[200px] bg-gray-300 rounded-xl relative overflow-hidden">
-        <img onClick={() => navigate('/services')} className="h-full w-full object-cover" src="/src/assets/Compress-images/DSC06769-HDR_15_11zon.jpg" />
+        <img onClick={() => navigate('/services')} className="h-full w-full object-cover" src={dsc06769} />
 
         <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
           Kitchen Designs
@@ -421,7 +435,7 @@ const Home = () => {
       </div>
 
       <div className="w-[420px] h-[200px] bg-gray-300 rounded-xl relative overflow-hidden">
-        <img onClick={() => navigate('/services')} className="h-full w-full object-cover" src="/src/assets/Compress-images/DSC06781-HDR_18_11zon.jpg" />
+        <img onClick={() => navigate('/services')} className="h-full w-full object-cover" src={dsc06781} />
 
         <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
           Living Room
@@ -431,7 +445,7 @@ const Home = () => {
 
     {/* THIRD ROW */}
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
-      <img onClick={() => navigate('/services')} src="/src/assets/Compress-images/DSC06788-HDR_17_11zon.jpg" className="w-full h-full object-cover" />
+      <img onClick={() => navigate('/services')} src={dsc06788} className="w-full h-full object-cover" />
 
       <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
         Dining Room
@@ -439,7 +453,7 @@ const Home = () => {
     </div>
 
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
-      <img onClick={() => navigate('/services')} src="/src/assets/Compress-images/DSC06796-HDR_14_11zon.jpg" className="w-full h-full object-cover" />
+      <img onClick={() => navigate('/services')} src={dsc06796} className="w-full h-full object-cover" />
 
       <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
         Kids Room
@@ -447,7 +461,7 @@ const Home = () => {
     </div>
 
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
-      <img onClick={() => navigate('/services')} src="/src/assets/Compress-images/DSC06807-HDR_16_11zon.jpg" className="w-full h-full object-cover" />
+      <img onClick={() => navigate('/services')} src={dsc06807} className="w-full h-full object-cover" />
 
       <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
         Wardrobe Designs
@@ -455,7 +469,7 @@ const Home = () => {
     </div>
 
     <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
-      <img onClick={() => navigate('/services')} src="/src/assets/Compress-images/DSC06818-HDR_5_11zon.jpg" className="w-full h-full object-cover" />
+      <img onClick={() => navigate('/services')} src={dsc06818} className="w-full h-full object-cover" />
 
       <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
         Homes by Livspace
@@ -578,7 +592,7 @@ const Home = () => {
             <div className="lg:col-span-6">
               <div className="relative w-full h-64 rounded-2xl overflow-hidden">
                 <img 
-                  src="/src/assets/Compress-images/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background.jpg" 
+                  src={professionalImage} 
                   alt="Swapnil Kadam" 
                   className="w-full h-full object-cover"
                 />
@@ -608,7 +622,7 @@ const Home = () => {
       <section
         className="py-20 bg-primary text-primary-foreground relative bg-cover bg-center"
         style={{
-          backgroundImage: ` url('/src/assets/6472846.jpg')`,
+          backgroundImage: `url(${backgroundImage})`,
         }}
       >
       </section>
