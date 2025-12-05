@@ -293,7 +293,7 @@ const Services = () => {
           <h1 className="text-5xl font-bold mb-6">Our Projects</h1>
           <p className="text-xl max-w-3xl mx-auto opacity-95">
             Comprehensive interior design and renovation solutions tailored to
-            your lifestyle and budget
+            your lifestyle and budgets
           </p>
         </div>
       </section>
