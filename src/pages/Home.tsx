@@ -312,11 +312,10 @@ const Home = () => {
           </SwiperSlide>
         </Swiper>
       </section>
-
-      {/* Contact Form */}
-      <section className="py-16 bg-gray-300/40">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
+      {/* contact form */}
+      <section className="py-16 bg-gray-300/40 bg-[url('/assets/bedroom.jpg')] bg-cover bg-center bg-no-repeat">
+        <div className="container mx-auto px-4 flex justify-between">
+          <div className="max-w-2xl mx-auto backdrop-blur-sm bg-white/70 p-6 rounded-2xl">
             <h2 className="text-2xl md:text-4xl font-bold text-center mb-4">
               Get Your Free Consultation
             </h2>
@@ -324,17 +323,18 @@ const Home = () => {
               Fill out the form below and our design experts will get back to
               you within 24 hours
             </p>
-            <Card className="">
+
+            <Card>
               <form className="space-y-6">
                 <div>
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full p-4 border  focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="w-full p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
                 <div className="flex gap-2">
-                  <select className="p-4 border  focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white">
+                  <select className="p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white">
                     <option value="+91">🇮🇳 +91</option>
                     <option value="+1">🇺🇸 +1</option>
                     <option value="+44">🇬🇧 +44</option>
@@ -344,14 +344,14 @@ const Home = () => {
                   <input
                     type="tel"
                     placeholder="Contact No"
-                    className="flex-1 p-4 border  focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="flex-1 p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
                 <div>
                   <input
                     type="text"
                     placeholder="Pin Code"
-                    className="w-full p-4 border  focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="w-full p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
                 <Button
@@ -366,6 +366,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       {/* Why Choose Us - Section */}
       <section className="py-7 bg-[#5F8F9F] overflow-hidden">
         <div className="container mx-auto px-4 rounded-md">
@@ -556,7 +557,9 @@ const Home = () => {
                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
                 className="w-full h-full object-cover"
               />
-              <span className="label">Master Bedroom</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
@@ -565,7 +568,9 @@ const Home = () => {
                 src="https://images.unsplash.com/photo-1586105251261-72a756497a11"
                 className="w-full h-full object-cover"
               />
-              <span className="label">False Ceiling</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
@@ -574,7 +579,9 @@ const Home = () => {
                 src={bedroomImage}
                 className="w-full h-full object-cover"
               />
-              <span className="label">Home Office</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             {/* Row 2 */}
@@ -584,7 +591,9 @@ const Home = () => {
                 src={bedroomImage}
                 className="w-full h-full object-cover"
               />
-              <span className="label">Kitchen Designs</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             <div className="col-span-6 h-[250px] rounded-xl relative overflow-hidden">
@@ -593,7 +602,9 @@ const Home = () => {
                 src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353"
                 className="w-full h-full object-cover"
               />
-              <span className="label">Living Room</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             {/* Row 3 */}
@@ -603,7 +614,9 @@ const Home = () => {
                 src={bedroomImage}
                 className="w-full h-full object-cover"
               />
-              <span className="label">Dining Room</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             <div className="col-span-3 h-[180px] rounded-xl relative overflow-hidden">
@@ -612,7 +625,9 @@ const Home = () => {
                 src={bedroomImage}
                 className="w-full h-full object-cover"
               />
-              <span className="label">Kids Room</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             <div className="col-span-3 h-[180px] rounded-xl relative overflow-hidden">
@@ -621,7 +636,9 @@ const Home = () => {
                 src={bedroomImage}
                 className="w-full h-full object-cover"
               />
-              <span className="label">Wardrobe Designs</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
 
             <div className="col-span-3 h-[180px] rounded-xl relative overflow-hidden">
@@ -630,7 +647,9 @@ const Home = () => {
                 src={bedroomImage}
                 className="w-full h-full object-cover"
               />
-              <span className="label">Homes by Livspace</span>
+              <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                Master Bedroom
+              </span>
             </div>
           </div>
         </div>
@@ -896,7 +915,6 @@ const Home = () => {
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-[#0000]/75"></div>
 
-        
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl font-bold mb-4">
             Ready to Transform Your Home?

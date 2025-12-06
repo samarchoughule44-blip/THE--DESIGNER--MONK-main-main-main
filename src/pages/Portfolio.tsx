@@ -142,7 +142,7 @@ const Portfolio = () => {
       {/* Filter Section (FIXED & SCROLLABLE) */}
       <section className="py-3 sticky top-20 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-15">
-          <div className="scroll-container flex overflow-x-auto gap-7 pb-1  ">
+          <div className="scroll-container no-scrollbar flex overflow-x-auto gap-7 pb-1 max-w-max touch-pan-x">
             {categories.map((category, index) => (
               <button
                 key={index}
