@@ -124,9 +124,9 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="move-up mb-8">
             <img 
-              src={teamImage} 
+              src="/assets/Compress-images/team.jpg"
               alt="The Designer Monk Team" 
-              className="w-full rounded-2xl object-cover"
+              className="w-full h-72 rounded-2xl object-cover"
             />
           </div>
           

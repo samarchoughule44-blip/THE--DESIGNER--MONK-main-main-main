@@ -330,34 +330,37 @@ const Home = () => {
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
+
                 <div className="flex gap-2">
-                  <select className="p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white">
+                  <select className="p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white">
                     <option value="+91">🇮🇳 +91</option>
                     <option value="+1">🇺🇸 +1</option>
                     <option value="+44">🇬🇧 +44</option>
                     <option value="+971">🇦🇪 +971</option>
                     <option value="+65">🇸🇬 +65</option>
                   </select>
+
                   <input
                     type="tel"
                     placeholder="Contact No"
-                    className="flex-1 p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="flex-1 p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
+
                 <div>
                   <input
                     type="text"
                     placeholder="Pin Code"
-                    className="w-full p-4 border focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
+
                 <Button
                   type="submit"
-                  className="w-full py-3 text-base md:py-4 md:text-lg"
-                  style={{ borderRadius: "30px" }}
+                  className="w-full py-3 text-base md:py-4 md:text-lg rounded-xl"
                 >
                   Get Free Consultation
                 </Button>
@@ -701,6 +704,7 @@ const Home = () => {
       {/* About Section */}
       <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
+          <img src="/assets/compresss-images/team.jpg" alt="" />
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-12 text-center mb-8">
               <h2 className="text-2xl font-semibold mb-2 text-start">
@@ -743,9 +747,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="relative w-full h-[18vw] overflow-hidden">
+      {/* banner-image */}
+      <section className="relative w-full h-full overflow-hidden">
         <img
-          src="/assets/6472846.jpg"
+          src="/assets/banner-img.jpg"
           alt=""
           className="w-full h-full object-cover"
         />
