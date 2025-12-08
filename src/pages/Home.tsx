@@ -97,6 +97,39 @@ useEffect(() => {
 
 
 
+useEffect(() => {
+  gsap.utils.toArray(".ripple-btn").forEach((btn) => {
+    const circle = document.createElement("span");
+    circle.classList.add("ripple-circle");
+    btn.appendChild(circle);
+
+    const size = btn.offsetWidth * 2;
+    circle.style.width = `${size}px`;
+    circle.style.height = `${size}px`;
+
+    btn.addEventListener("mouseenter", () => {
+      gsap.fromTo(
+        circle,
+        { scale: 0, opacity: 0.6 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      );
+    });
+
+    btn.addEventListener("mouseleave", () => {
+      gsap.to(circle, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
+    });
+  });
+}, []);
 
 
   const categories = [
@@ -233,7 +266,7 @@ useEffect(() => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-20">
       <section className="relative h-[600px] overflow-hidden">
         <Swiper
           modules={[Autoplay, Pagination, EffectFade]}
@@ -407,7 +440,7 @@ useEffect(() => {
 
                 <Button
                   type="submit"
-                  className="w-full py-3 text-base md:py-4 md:text-lg rounded-xl"
+                  className="ripple-btn w-full py-3 text-base md:py-4 md:text-lg rounded-xl"
                 >
                   Get Free Consultation
                 </Button>
@@ -599,7 +632,7 @@ useEffect(() => {
           </div>
 
           {/* ---------------------- DESKTOP VERSION ---------------------- */}
-          <div className="hidden max-w-[89vw] mx-auto md:grid grid-cols-12 gap-4 mt-6 ">
+          <div className="hidden max-w-[81.3vw] mx-auto md:grid grid-cols-12 gap-4 mt-6 ">
             {/* Row 1 */}
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
               <img
@@ -784,7 +817,7 @@ useEffect(() => {
                   design philosophy.
                 </p>
                 <div className="text-center">
-                  <Button asChild variant="outline">
+                  <Button className="ripple-btn">
                     <Link to="/about">Know More</Link>
                   </Button>
                 </div>

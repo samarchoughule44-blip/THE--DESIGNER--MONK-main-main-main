@@ -286,11 +286,21 @@ const Services = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden   bg-gradient-to-r from-primary to-primary/80 text-primary-foreground  py-20 ">
-      <img className="absolute  inset-0 bg-gradient-to-b from-black/20 to-[#0000]/75 object-cover h-70 top-0 w-full" src="/assets/Compress-images/living.jpg" alt="" />
-        <div className=" overflow-hidden relative container mx-auto px-4 text-center">
-        
-          <h1 className="text-5xl font-bold mb-6">Our Projects</h1>
+      <section className="relative overflow-hidden text-primary-foreground py-20">
+        {/* Background Image + Gradient Overlay */}
+        <div className="absolute inset-0">
+          <img
+            src="/assets/Compress-images/livingroom3.jpg"
+            className="h-full w-full object-cover"
+            alt=""
+          />
+
+          {/* Gradient Overlay on top of image */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/55"></div>
+        </div>
+
+        <div className="relative container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold mb-6" >  Our services </h1>
           <p className="text-xl max-w-3xl mx-auto opacity-95">
             Comprehensive interior design and renovation solutions tailored to
             your lifestyle and budgets
@@ -308,21 +318,19 @@ const Services = () => {
             <div className="flex bg-transparent border-b border-gray-200">
               <button
                 onClick={() => setActiveTab("delivered")}
-                className={`px-6 py-3 font-medium transition-all relative ${
-                  activeTab === "delivered"
+                className={`px-6 py-3 font-medium transition-all relative ${activeTab === "delivered"
                     ? "text-primary border-b-2 border-primary"
                     : "text-muted-foreground hover:text-primary"
-                }`}
+                  }`}
               >
                 Delivered Projects
               </button>
               <button
                 onClick={() => setActiveTab("upcoming")}
-                className={`px-6 py-3 font-medium transition-all relative ${
-                  activeTab === "upcoming"
+                className={`px-6 py-3 font-medium transition-all relative ${activeTab === "upcoming"
                     ? "text-primary border-b-2 border-primary"
                     : "text-muted-foreground hover:text-primary"
-                }`}
+                  }`}
               >
                 Upcoming Projects
               </button>
@@ -403,8 +411,8 @@ const Services = () => {
           {/* Load More Button (fallback) */}
           {!loading &&
             visibleProjects <
-              (activeTab === "delivered" ? deliveredProjects : upcomingProjects)
-                .length && (
+            (activeTab === "delivered" ? deliveredProjects : upcomingProjects)
+              .length && (
               <div className="flex justify-center mt-8">
                 <Button onClick={loadMoreProjects} variant="outline">
                   Load More Projects
