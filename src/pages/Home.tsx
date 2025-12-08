@@ -842,7 +842,7 @@ useEffect(() => {
           <h2 className="text-2xl md:text-4xl font-bold flex justify-center  mb-4">
             How It Works
           </h2>
-          <p className="flex center text-muted-foreground mb-12 max-w-2xl mx-auto font-dm-sans  justify-center ">
+          <p className="flex text-center text-muted-foreground mb-12 max-w-2xl mx-auto font-dm-sans  justify-center ">
             Our simple 4-step process makes interior design effortless
           </p>
 
@@ -853,9 +853,9 @@ useEffect(() => {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {steps.map((step, index) => (
-                <div key={index} className="relative">
+                <div key={index} className="relative flex flex-col items-center md:block">
                   {/* Step Circle */}
-                  <div className="flex flex-col items-start md:items-center text-left md:text-center">
+                  <div className="flex flex-col items-center text-center">
                     <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl font-bold mb-4 relative z-10">
                       {step.number}
                     </div>
@@ -867,7 +867,7 @@ useEffect(() => {
 
                   {/* Mobile Connection Line */}
                   {index < steps.length - 1 && (
-                    <div className="md:hidden w-0.5 h-8 bg-muted-foreground/20 ml-8 mt-2"></div>
+                    <div className="md:hidden w-0.5 h-8 bg-muted-foreground/20 mt-2"></div>
                   )}
                 </div>
               ))}
