@@ -393,29 +393,31 @@ useEffect(() => {
         </Swiper>
       </section>
       {/* contact form */}
-      <section className=".reveal-stagger py-16 bg-gray-300/40 bg-[url('/assets/bedroom.jpg')] bg-cover bg-center bg-no-repeat">
-        <div className="container mx-auto px-4 flex justify-between">
-          <div className=" max-w-2xl  mx-auto backdrop-blur-sm bg-white/70 p-6 rounded-2xl">
-            <h2 className="reveal text-2xl md:text-4xl font-bold text-center mb-4">
+      <section className="relative py-6 md:py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${bedroomImage})` }} />
+        <div className="absolute inset-0 bg-amber-50/90" />
+        <div className="container mx-auto px-2 md:px-4 relative z-10">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-lg md:text-4xl font-bold text-center mb-2 md:mb-4">
               Get Your Free Consultation
             </h2>
-            <p className="reveal text-center text-muted-foreground mb-8 font-dm-sans">
+            <p className="text-center text-xs md:text-base text-muted-foreground mb-3 md:mb-8 font-dm-sans">
               Fill out the form below and our design experts will get back to
               you within 24 hours
             </p>
 
-            <Card>
-              <form className="reveal space-y-6">
+            <Card className="p-2 md:p-6">
+              <form className="space-y-4 md:space-y-6">
                 <div>
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="w-full p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
 
                 <div className="flex gap-2">
-                  <select className="p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white">
+                  <select className="p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white text-sm md:text-base">
                     <option value="+91">🇮🇳 +91</option>
                     <option value="+1">🇺🇸 +1</option>
                     <option value="+44">🇬🇧 +44</option>
@@ -426,7 +428,7 @@ useEffect(() => {
                   <input
                     type="tel"
                     placeholder="Contact No"
-                    className="flex-1 p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="flex-1 p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
 
@@ -434,13 +436,13 @@ useEffect(() => {
                   <input
                     type="text"
                     placeholder="Pin Code"
-                    className="w-full p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    className="w-full p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  className="ripple-btn w-full py-3 text-base md:py-4 md:text-lg rounded-xl"
+                  className="w-full py-3 text-base md:py-4 md:text-lg rounded-xl"
                 >
                   Get Free Consultation
                 </Button>
@@ -493,7 +495,7 @@ useEffect(() => {
 
       <section className="w-full py-6 bg-gray-300/40">
         <div className="mx-auto  rounded-3xl p-5 ">
-          <h2 className="text-xl flex justify-center font-bold mb-1 font-dm-sans">
+          <h2 className="text-2xl md:text-4xl font-bold text-left mb-4">
             Inspiration for home interior designs
           </h2>
           <p className="text-sm flex justify-center text-gray-600 mb-4 pt-3">
@@ -784,7 +786,6 @@ useEffect(() => {
       {/* About Section */}
       <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
-          <img src="/assets/compresss-images/team.jpg" alt="" />
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-12 text-center mb-8">
               <h2 className="text-2xl font-semibold mb-2 text-start">
@@ -796,7 +797,7 @@ useEffect(() => {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+              <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden">
                 <img
                   src={professionalImage}
                   alt="Swapnil Kadam"

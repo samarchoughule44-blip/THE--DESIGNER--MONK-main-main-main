@@ -27,6 +27,10 @@ const AppContent = () => {
   const location = useLocation();
   const isGalleryPage = location.pathname === '/gallery';
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div className="flex flex-col min-h-screen">
       {!isGalleryPage && <Navigation />}

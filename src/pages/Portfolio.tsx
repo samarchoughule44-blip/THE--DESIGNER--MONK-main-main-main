@@ -135,23 +135,21 @@ const Portfolio = () => {
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
       <section className="relative overflow-hidden text-primary-foreground py-20">
-        {/* Background Image + Gradient Overlay */}
+        {/* Background Image */}
         <div className="absolute inset-0">
           <img
             src="/assets/Compress-images/team.jpg"
             className="h-full w-full object-cover"
             alt=""
           />
-
-          {/* Gradient Overlay on top of image */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/55"></div>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-primary/80 to-primary/40"></div>
         </div>
 
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6" >  Our Porfolio </h1>
-          <p className="text-xl max-w-3xl mx-auto opacity-95">
-            Comprehensive interior design and renovation solutions tailored to
-            your lifestyle and budgets
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <h1 className="text-3xl md:text-6xl font-bold mb-6">Ideas to Transform Your Living Space</h1>
+          <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
+            Explore our collection of beautifully designed spaces that reflect our commitment to excellence
           </p>
         </div>
       </section>
