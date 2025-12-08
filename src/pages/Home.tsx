@@ -266,7 +266,7 @@ useEffect(() => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-20">
       <section className="relative h-[600px] overflow-hidden">
         <Swiper
           modules={[Autoplay, Pagination, EffectFade]}
@@ -632,7 +632,7 @@ useEffect(() => {
           </div>
 
           {/* ---------------------- DESKTOP VERSION ---------------------- */}
-          <div className="hidden max-w-[89vw] mx-auto md:grid grid-cols-12 gap-4 mt-6 ">
+          <div className="hidden max-w-[81.3vw] mx-auto md:grid grid-cols-12 gap-4 mt-6 ">
             {/* Row 1 */}
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
               <img
