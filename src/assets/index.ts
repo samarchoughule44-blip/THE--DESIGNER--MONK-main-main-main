@@ -17,5 +17,5 @@ export const dsc06788 = '/assets/Compress-images/livingroom3.jpg';
 export const dsc06796 = '/assets/Compress-images/kitchen2.jpg';
 export const dsc06807 = '/assets/Compress-images/bedroom2.jpg';
 export const dsc06818 = '/assets/Compress-images/livingroom4.jpg';
-export const professionalImage = '/assets/Compress-images/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background.jpg';
+export const professionalImage = '/assets/Compress-images/photo.jpg';
 export const teamImage = '/assets/Compress-images/compressed_group-people-working-out-business-plan-office (1).jpg';
