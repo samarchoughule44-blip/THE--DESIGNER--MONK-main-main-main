@@ -12,6 +12,8 @@ html, body{
   scrollbar-width: thin;
   scrollbar-color: #59947C;
   background: transparent;
+  overflow-x: hidden;
+  
 }
 
 

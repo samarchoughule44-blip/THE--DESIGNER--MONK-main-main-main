@@ -393,10 +393,10 @@ useEffect(() => {
         </Swiper>
       </section>
       {/* contact form */}
-      <section className="py-8 md:py-16 bg-gray-300/40">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-4xl font-bold text-center mb-4">
+      <section className=".reveal-stagger py-16 bg-gray-300/40 bg-[url('/assets/bedroom.jpg')] bg-cover bg-center bg-no-repeat">
+        <div className="container mx-auto px-4 flex justify-between">
+          <div className=" max-w-2xl  mx-auto backdrop-blur-sm bg-white/70 p-6 rounded-2xl">
+            <h2 className="reveal text-2xl md:text-4xl font-bold text-center mb-4">
               Get Your Free Consultation
             </h2>
             <p className="text-center text-muted-foreground mb-6 md:mb-8 font-dm-sans px-4">
