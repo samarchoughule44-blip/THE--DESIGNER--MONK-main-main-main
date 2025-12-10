@@ -407,17 +407,43 @@ useEffect(() => {
             </p>
 
             <Card className="p-2 md:p-6">
-              <form className="space-y-4 md:space-y-6">
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target as HTMLFormElement);
+                const countryCode = formData.get('countryCode');
+                const phone = formData.get('phone');
+                try {
+                  const response = await fetch('http://localhost:5000/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      name: formData.get('name'),
+                      email: 'noemail@provided.com',
+                      phone: `${countryCode}${phone}`,
+                      message: `Pin Code: ${formData.get('pincode')}`,
+                      source: 'Home Page Consultation'
+                    })
+                  });
+                  if (response.ok) {
+                    alert('Consultation request submitted successfully!');
+                    (e.target as HTMLFormElement).reset();
+                  }
+                } catch (error) {
+                  alert('Failed to submit request. Please try again.');
+                }
+              }} className="space-y-4 md:space-y-6">
                 <div>
                   <input
+                    name="name"
                     type="text"
                     placeholder="Your Name"
                     className="w-full p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    required
                   />
                 </div>
 
                 <div className="flex gap-2">
-                  <select className="p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white text-sm md:text-base">
+                  <select name="countryCode" className="p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white text-sm md:text-base">
                     <option value="+91">🇮🇳 +91</option>
                     <option value="+1">🇺🇸 +1</option>
                     <option value="+44">🇬🇧 +44</option>
@@ -426,17 +452,21 @@ useEffect(() => {
                   </select>
 
                   <input
+                    name="phone"
                     type="tel"
                     placeholder="Contact No"
                     className="flex-1 p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    required
                   />
                 </div>
 
                 <div>
                   <input
+                    name="pincode"
                     type="text"
                     placeholder="Pin Code"
                     className="w-full p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    required
                   />
                 </div>
 

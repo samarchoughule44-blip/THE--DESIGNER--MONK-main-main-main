@@ -354,26 +354,57 @@ const Services = () => {
               <X size={20} />
             </button>
             <h3 className="text-2xl font-bold mb-4 text-center">Get Started</h3>
-            <form className="space-y-4">
+            <form onSubmit={async (e) => {
+              e.preventDefault();
+              const formData = new FormData(e.target as HTMLFormElement);
+              try {
+                const response = await fetch('http://localhost:5000/api/leads', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    message: formData.get('message') as string,
+                    source: 'Services Page'
+                  })
+                });
+                if (response.ok) {
+                  alert('Request submitted successfully!');
+                  setShowPopup(false);
+                  (e.target as HTMLFormElement).reset();
+                }
+              } catch (error) {
+                alert('Failed to submit request. Please try again.');
+              }
+            }} className="space-y-4">
               <input
+                name="name"
                 type="text"
                 placeholder="Your Name"
                 className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                required
               />
               <input
+                name="email"
                 type="email"
                 placeholder="Email Address"
                 className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                required
               />
               <input
+                name="phone"
                 type="tel"
                 placeholder="Phone Number"
                 className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                required
               />
               <textarea
+                name="message"
                 placeholder="Project Details"
                 rows={3}
                 className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                required
               />
               <Button type="submit" className="w-full">
                 Submit Request

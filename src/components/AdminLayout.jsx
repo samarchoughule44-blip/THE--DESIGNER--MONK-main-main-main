@@ -1,14 +1,14 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { LayoutDashboard, Users, Upload, LogOut } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
 
 export default function AdminLayout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    navigate("/admin");
+  function handleLogout() {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("isAdminLoggedIn");
+    navigate("/admin/login");
   }
 
   const isActive = (path) => location.pathname === path;

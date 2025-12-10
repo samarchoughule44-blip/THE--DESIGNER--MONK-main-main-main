@@ -5,16 +5,25 @@ const LeadSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  email: {
+    type: String,
+    required: true
+  },
   phone: {
     type: String,
     required: true
   },
-  email: String,
-  pincode: String,
-  message: String,
+  message: {
+    type: String,
+    required: true
+  },
+  source: {
+    type: String,
+    default: 'Contact Form'
+  },
   status: {
     type: String,
-    enum: ['new', 'contacted', 'converted', 'closed'],
+    enum: ['new', 'contacted', 'qualified', 'converted', 'closed'],
     default: 'new'
   },
   createdAt: {
