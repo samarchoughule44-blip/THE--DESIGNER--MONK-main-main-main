@@ -55,6 +55,7 @@ export default function Projects() {
       formData.append('scope', editingProject.scope);
       formData.append('propertyType', editingProject.propertyType);
       formData.append('size', editingProject.size);
+      formData.append('status', editingProject.status || 'delivered');
       formData.append('priceMin', editingProject.priceMin);
       formData.append('priceMax', editingProject.priceMax);
       
@@ -98,6 +99,7 @@ export default function Projects() {
       formData.append('scope', isAddingNew.scope);
       formData.append('propertyType', isAddingNew.propertyType);
       formData.append('size', isAddingNew.size);
+      formData.append('status', isAddingNew.status || 'delivered');
       formData.append('priceMin', isAddingNew.priceMin);
       formData.append('priceMax', isAddingNew.priceMax);
       formData.append('image', isAddingNew.image);
@@ -188,7 +190,12 @@ export default function Projects() {
             </div>
             
             <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-lg font-semibold">{project.title}</h3>
+                <span className={`px-2 py-1 text-xs rounded-full ${project.status === 'delivered' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                  {project.status === 'delivered' ? 'Delivered' : 'Upcoming'}
+                </span>
+              </div>
               <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Project:</span> {project.projectName}</p>
               <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Category:</span> {project.category}</p>
               <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Style:</span> {project.style}</p>
@@ -408,6 +415,19 @@ export default function Projects() {
               </div>
 
               <div>
+                <label className="block text-sm font-medium mb-1">Status</label>
+                <select
+                  value={isAddingNew.status || 'delivered'}
+                  onChange={(e) => setIsAddingNew({...isAddingNew, status: e.target.value})}
+                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                  required
+                >
+                  <option value="delivered">Delivered</option>
+                  <option value="upcoming">Upcoming</option>
+                </select>
+              </div>
+
+              <div>
                 <label className="block text-sm font-medium mb-1">Project Image</label>
                 <input
                   type="file"
@@ -445,7 +465,8 @@ export default function Projects() {
           <div className="bg-white rounded-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <h2 className="text-xl font-bold mb-4">Edit Project</h2>
             
-            <form onSubmit={handleUpdate} className="space-y-4">
+            <div className="max-h-[70vh] overflow-y-auto pr-2">
+              <form id="edit-form" onSubmit={handleUpdate} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Title</label>
@@ -636,6 +657,19 @@ export default function Projects() {
               </div>
 
               <div>
+                <label className="block text-sm font-medium mb-1">Status</label>
+                <select
+                  value={editingProject.status || 'delivered'}
+                  onChange={(e) => setEditingProject({...editingProject, status: e.target.value})}
+                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                  required
+                >
+                  <option value="delivered">Delivered</option>
+                  <option value="upcoming">Upcoming</option>
+                </select>
+              </div>
+
+              <div>
                 <label className="block text-sm font-medium mb-1">New Image (optional)</label>
                 <input
                   type="file"
@@ -645,23 +679,26 @@ export default function Projects() {
                 />
               </div>
 
-              <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => setEditingProject(null)}
-                  className="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="flex-1 bg-primary text-white py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50"
-                >
-                  {loading ? 'Updating...' : 'Update'}
-                </button>
-              </div>
-            </form>
+              </form>
+            </div>
+            
+            <div className="flex gap-4 mt-6 pt-4 border-t">
+              <button
+                type="button"
+                onClick={() => setEditingProject(null)}
+                className="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                form="edit-form"
+                disabled={loading}
+                className="flex-1 bg-primary text-white py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50"
+              >
+                {loading ? 'Updating...' : 'Update'}
+              </button>
+            </div>
           </div>
         </div>
       )}

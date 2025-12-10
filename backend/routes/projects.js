@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // POST create project with image compression
 router.post('/', upload.single('image'), compressImage, async (req, res) => {
   try {
-    const { title, projectName, category, style, layout, location, pricing, bhk, scope, propertyType, size, priceMin, priceMax } = req.body;
+    const { title, projectName, category, style, layout, location, pricing, bhk, scope, propertyType, size, priceMin, priceMax, status } = req.body;
 
     if (!req.fileInfo) {
       return res.status(400).json({ error: 'Image is required' });
@@ -34,6 +34,7 @@ router.post('/', upload.single('image'), compressImage, async (req, res) => {
       scope,
       propertyType,
       size,
+      status: status || 'delivered',
       priceMin: Number(priceMin),
       priceMax: Number(priceMax),
       imageUrl: req.fileInfo.path,
@@ -54,7 +55,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
   console.log('Has file:', !!req.file);
   
   try {
-    const { title, projectName, category, style, layout, location, pricing, bhk, scope, propertyType, size, priceMin, priceMax } = req.body;
+    const { title, projectName, category, style, layout, location, pricing, bhk, scope, propertyType, size, priceMin, priceMax, status } = req.body;
     
     const updateData = {
       title,
@@ -68,6 +69,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
       scope,
       propertyType,
       size,
+      status: status || 'delivered',
       priceMin: Number(priceMin),
       priceMax: Number(priceMax)
     };

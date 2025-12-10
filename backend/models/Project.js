@@ -52,6 +52,12 @@ const ProjectSchema = new mongoose.Schema({
     required: true,
     enum: ['500 to 1000 sq ft', '1000 to 2500 sq ft', '2500 to 5000 sq ft', '5000+ sq ft']
   },
+  status: {
+    type: String,
+    required: true,
+    enum: ['delivered', 'upcoming'],
+    default: 'delivered'
+  },
   priceMin: {
     type: Number,
     required: true

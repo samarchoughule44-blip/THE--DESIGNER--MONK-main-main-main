@@ -19,6 +19,8 @@ const Services = () => {
   const [visibleProjects, setVisibleProjects] = useState(4);
   const [loading, setLoading] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [deliveredProjects, setDeliveredProjects] = useState([]);
+  const [upcomingProjects, setUpcomingProjects] = useState([]);
 
   useEffect(() => {
     fetchProjects();
@@ -30,6 +32,8 @@ const Services = () => {
       if (response.ok) {
         const data = await response.json();
         setProjects(data);
+        setDeliveredProjects(data.filter(project => project.status === 'delivered'));
+        setUpcomingProjects(data.filter(project => project.status === 'upcoming'));
       }
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -232,7 +236,7 @@ const Services = () => {
 
           {/* Project Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {projects
+            {(activeTab === "delivered" ? deliveredProjects : upcomingProjects)
               .slice(0, visibleProjects)
               .map((project) => (
                 <Card
@@ -306,7 +310,7 @@ const Services = () => {
           )}
 
           {/* Load More Button (fallback) */}
-          {!loading && visibleProjects < projects.length && (
+          {!loading && visibleProjects < (activeTab === "delivered" ? deliveredProjects : upcomingProjects).length && (
             <div className="flex justify-center mt-8">
               <Button onClick={loadMoreProjects} variant="outline">
                 Load More Projects
