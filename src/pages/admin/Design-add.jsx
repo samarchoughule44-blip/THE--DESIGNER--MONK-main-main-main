@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAdminGuard from "@/hooks/useAdminGuard";
 import AdminLayout from "@/components/AdminLayout";
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://super-disco-the-designer-monk-production.up.railway.app/api';
 
 export default function AddDesign() {
   useAdminGuard();

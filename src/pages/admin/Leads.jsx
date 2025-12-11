@@ -20,7 +20,7 @@ export default function Leads() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/leads?page=${pagination.page}&limit=${pagination.limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`
+        `https://super-disco-the-designer-monk-production.up.railway.app/api/leads?page=${pagination.page}&limit=${pagination.limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -44,7 +44,7 @@ export default function Leads() {
 
   const updateLeadStatus = async (id, status) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/leads/${id}`, {
+      const response = await fetch(`https://super-disco-the-designer-monk-production.up.railway.app/api/leads/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
@@ -60,7 +60,7 @@ export default function Leads() {
   const deleteLead = async (id) => {
     if (!confirm('Are you sure you want to delete this lead?')) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/leads/${id}`, {
+      const response = await fetch(`https://super-disco-the-designer-monk-production.up.railway.app/api/leads/${id}`, {
         method: 'DELETE'
       });
       if (response.ok) {

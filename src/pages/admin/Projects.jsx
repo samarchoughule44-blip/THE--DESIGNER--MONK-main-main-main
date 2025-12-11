@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Edit, Trash2, Plus } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import useAdminGuard from "@/hooks/useAdminGuard";
+import { apiService } from "@/config/api";
+import API_BASE_URL from "@/config/api";
 
 export default function Projects() {
   useAdminGuard();
@@ -16,25 +18,56 @@ export default function Projects() {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/projects');
+      const response = await apiService.getProjects();
       if (response.ok) {
         const data = await response.json();
-        setProjects(data);
+        console.log('Raw API response:', data);
+        console.log('Is data an array?', Array.isArray(data));
+        console.log('Data type:', typeof data);
+        
+        // Handle different response structures
+        let projectsArray = [];
+        if (Array.isArray(data)) {
+          projectsArray = data;
+        } else if (data && Array.isArray(data.projects)) {
+          projectsArray = data.projects;
+        } else if (data && data.data && Array.isArray(data.data)) {
+          projectsArray = data.data;
+        }
+        
+        console.log('Final projects array:', projectsArray);
+        console.log('Projects count:', projectsArray.length);
+        setProjects(projectsArray);
       } else {
         console.error('Failed to fetch projects:', response.status);
+        setProjects([]);
         alert('Failed to load projects. Make sure backend server is running.');
       }
     } catch (error) {
       console.error('Error fetching projects:', error);
-      alert('Cannot connect to backend. Make sure server is running on port 5000.');
+      setProjects([]);
+      alert('Cannot connect to backend. Make sure server is running.');
     }
   };
 
   const handleEdit = (project) => {
+    console.log(project, "project-details");
     setEditingProject({
       ...project,
-      priceMin: project.priceMin.toString(),
-      priceMax: project.priceMax.toString()
+      title: project.title || '',
+      projectName: project.projectName || '',
+      category: project.category || '',
+      style: project.style || '',
+      layout: project.layout || '',
+      location: project.location || '',
+      pricing: project.pricing || '',
+      bhk: project.bhk || '',
+      scope: project.scope || '',
+      propertyType: project.propertyType || '',
+      size: project.size || '',
+      status: project.status || 'delivered',
+      priceMin: (project.priceMin || 0).toString(),
+      priceMax: (project.priceMax || 0).toString()
     });
   };
 
@@ -60,18 +93,31 @@ export default function Projects() {
       formData.append('priceMax', editingProject.priceMax);
       
       if (editingProject.newImage) {
+        console.log('Adding new image to FormData:', editingProject.newImage);
         formData.append('image', editingProject.newImage);
+      } else {
+        console.log('No new image selected');
       }
-
-      const response = await fetch(`http://localhost:5000/api/projects/${editingProject._id}`, {
-        method: 'PUT',
-        body: formData
-      });
+      
+      // Debug FormData contents
+      console.log('FormData contents:');
+      for (let [key, value] of formData.entries()) {
+        console.log(key, ':', value);
+      }
+      console.log('Editing project ID:', editingProject._id);
+      console.log('Has new image?', !!editingProject.newImage);
+      
+      const response = await apiService.updateProject(editingProject._id, formData);
 
       if (response.ok) {
         alert('Project updated successfully!');
-        fetchProjects();
+        // Force refresh projects to get updated image URLs
+        await fetchProjects();
         setEditingProject(null);
+        // Force page refresh if image was updated
+        if (editingProject.newImage) {
+          // window.location.reload();
+        }
       } else {
         const errorText = await response.text();
         alert(`Server Error (${response.status}): ${errorText}`);
@@ -104,10 +150,7 @@ export default function Projects() {
       formData.append('priceMax', isAddingNew.priceMax);
       formData.append('image', isAddingNew.image);
 
-      const response = await fetch('http://localhost:5000/api/projects', {
-        method: 'POST',
-        body: formData
-      });
+      const response = await apiService.createProject(formData);
 
       if (response.ok) {
         alert('Project added successfully!');
@@ -127,9 +170,7 @@ export default function Projects() {
     if (!confirm('Are you sure you want to delete this project?')) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/projects/${id}`, {
-        method: 'DELETE'
-      });
+      const response = await apiService.deleteProject(id);
       
       if (response.ok) {
         alert('Project deleted successfully!');
@@ -154,7 +195,10 @@ export default function Projects() {
   return (
     <AdminLayout>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Manage Projects</h1>
+        <div>
+          <h1 className="text-2xl font-bold">Manage Projects</h1>
+          <p className="text-sm text-gray-600">Total projects: {projects.length}</p>
+        </div>
         <button
           onClick={() => setIsAddingNew(true)}
           className="bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-primary/90"
@@ -166,12 +210,17 @@ export default function Projects() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
+          
           <div key={project._id} className="bg-white rounded-xl shadow-lg overflow-hidden">
             <div className="relative">
               <img
-                src={`http://localhost:5000${project.imageUrl}`}
+                src={`${project.imageUrl}?t=${Date.now()}`}
                 alt={project.title}
                 className="w-full h-48 object-cover"
+                onError={(e) => {
+                  e.target.src = '/placeholder-image.jpg';
+                  e.target.onerror = null;
+                }}
               />
               <div className="absolute top-2 right-2 flex gap-2">
                 <button
@@ -191,23 +240,23 @@ export default function Projects() {
             
             <div className="p-4">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-lg font-semibold">{project.title}</h3>
+                <h3 className="text-lg font-semibold">{project.title || 'N/A'}</h3>
                 <span className={`px-2 py-1 text-xs rounded-full ${project.status === 'delivered' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
                   {project.status === 'delivered' ? 'Delivered' : 'Upcoming'}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Project:</span> {project.projectName}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Category:</span> {project.category}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Style:</span> {project.style}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Layout:</span> {project.layout}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Location:</span> {project.location}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">BHK:</span> {project.bhk}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Property:</span> {project.propertyType}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Size:</span> {project.size}</p>
-              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Scope:</span> {project.scope}</p>
-              <p className="text-sm text-gray-600 mb-2"><span className="font-medium">Pricing:</span> {project.pricing} Lakhs</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Project:</span> {project.projectName || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Category:</span> {project.category || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Style:</span> {project.style || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Layout:</span> {project.layout || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Location:</span> {project.location || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">BHK:</span> {project.bhk || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Property:</span> {project.propertyType || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Size:</span> {project.size || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-1"><span className="font-medium">Scope:</span> {project.scope || 'N/A'}</p>
+              <p className="text-sm text-gray-600 mb-2"><span className="font-medium">Pricing:</span> {project.pricing || 'N/A'} Lakhs</p>
               <p className="text-sm font-medium text-green-600 mb-2">
-                ₹{project.priceMin.toLocaleString()} - ₹{project.priceMax.toLocaleString()}
+                ₹{(project.priceMin || 0).toLocaleString()} - ₹{(project.priceMax || 0).toLocaleString()}
               </p>
               <div className="text-xs text-gray-500 border-t pt-2">
                 <p>Original: {formatFileSize(project.originalSize)}</p>
@@ -670,13 +719,27 @@ export default function Projects() {
               </div>
 
               <div>
+                {/* <label className="block text-sm font-medium mb-1">Current Image</label>
+                {editingProject.imageUrl && (
+                  <img 
+                    src={editingProject.imageUrl} 
+                    alt="Current project image" 
+                    className="w-32 h-24 object-cover rounded mb-2"
+                  />
+                )} */}
                 <label className="block text-sm font-medium mb-1">New Image (optional)</label>
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setEditingProject({...editingProject, newImage: e.target.files[0]})}
+                  onChange={(e) => {
+                    console.log('New image selected:', e.target.files[0]);
+                    setEditingProject({...editingProject, newImage: e.target.files[0]});
+                  }}
                   className="w-full p-2 border rounded-lg text-sm"
                 />
+                {editingProject.newImage && (
+                  <p className="text-sm text-green-600 mt-1">New image selected: {editingProject.newImage.name}</p>
+                )}
               </div>
 
               </form>

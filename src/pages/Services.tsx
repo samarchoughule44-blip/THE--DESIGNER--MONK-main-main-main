@@ -28,12 +28,17 @@ const Services = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/projects');
+      const response = await fetch('https://super-disco-the-designer-monk-production.up.railway.app/api/projects');
       if (response.ok) {
         const data = await response.json();
-        setProjects(data);
-        setDeliveredProjects(data.filter(project => project.status === 'delivered'));
-        setUpcomingProjects(data.filter(project => project.status === 'upcoming'));
+        console.log(data, "fetchProjects");
+        
+        // Handle nested response structure
+        const projectsArray = data.projects || data || [];
+        
+        setProjects(projectsArray);
+        setDeliveredProjects(projectsArray.filter(project => project.status === 'delivered'));
+        setUpcomingProjects(projectsArray.filter(project => project.status === 'upcoming'));
       }
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -245,7 +250,7 @@ const Services = () => {
                 >
                   <div className="relative h-64">
                     <img
-                      src={`http://localhost:5000${project.imageUrl}`}
+                      src={project.imageUrl}
                       alt={project.title}
                       className="w-full h-full object-cover"
                     />
@@ -358,7 +363,7 @@ const Services = () => {
               e.preventDefault();
               const formData = new FormData(e.target as HTMLFormElement);
               try {
-                const response = await fetch('http://localhost:5000/api/leads', {
+                const response = await fetch('https://super-disco-the-designer-monk-production.up.railway.app/api/leads', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({
