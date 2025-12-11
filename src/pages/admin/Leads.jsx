@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ChevronUp, ChevronDown, Eye, Trash2 } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import useAdminGuard from "@/hooks/useAdminGuard";
+import useAdminGuard from "@/hooks/useAdminGuard";
 
 export default function Leads() {
   useAdminGuard();
