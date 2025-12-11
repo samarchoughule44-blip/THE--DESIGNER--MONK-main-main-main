@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ChevronUp, ChevronDown, Eye, Trash2 } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import useAdminGuard from "@/hooks/useAdminGuard";
-import useAdminGuard from "@/hooks/useAdminGuard";
+import { apiService } from "@/config/api";
 
 export default function Leads() {
   useAdminGuard();
@@ -20,9 +20,12 @@ export default function Leads() {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://super-disco-the-designer-monk-production.up.railway.app/api/leads?page=${pagination.page}&limit=${pagination.limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`
-      );
+      const response = await apiService.getLeads({
+        page: pagination.page,
+        limit: pagination.limit,
+        sortBy,
+        sortOrder
+      });
       if (response.ok) {
         const data = await response.json();
         setLeads(data.leads);
@@ -45,11 +48,7 @@ export default function Leads() {
 
   const updateLeadStatus = async (id, status) => {
     try {
-      const response = await fetch(`https://super-disco-the-designer-monk-production.up.railway.app/api/leads/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status })
-      });
+      const response = await apiService.updateLead(id, { status });
       if (response.ok) {
         fetchLeads();
       }
@@ -61,9 +60,7 @@ export default function Leads() {
   const deleteLead = async (id) => {
     if (!confirm('Are you sure you want to delete this lead?')) return;
     try {
-      const response = await fetch(`https://super-disco-the-designer-monk-production.up.railway.app/api/leads/${id}`, {
-        method: 'DELETE'
-      });
+      const response = await apiService.deleteLead(id);
       if (response.ok) {
         fetchLeads();
       }

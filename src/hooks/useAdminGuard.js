@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "@/config/api";
 
 export default function useAdminGuard() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function useAdminGuard() {
       }
 
       try {
-        const response = await fetch('https://super-disco-the-designer-monk-production.up.railway.app/api/auth/verify', {
+        const response = await fetch(`${API_BASE_URL}/auth/verify`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
