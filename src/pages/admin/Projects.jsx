@@ -491,7 +491,7 @@ export default function Projects() {
                 <button
                   type="button"
                   onClick={() => setIsAddingNew(false)}
-                  className="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600"
+                  className="flex-1 bg-black  text-white py-3 rounded-lg hover:bg-gray-600"
                 >
                   Cancel
                 </button>
@@ -750,7 +750,7 @@ export default function Projects() {
               <button
                 type="button"
                 onClick={() => setEditingProject(null)}
-                className="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600"
+                className="flex-1 bg-black  text-white py-3 rounded-lg hover:bg-gray-600"
               >
                 Cancel
               </button>
