@@ -32,15 +32,15 @@ const Navigation = () => {
     isScrolled ? "bg-background shadow-md" : "bg-background/95 backdrop-blur-sm"
   }`}
 >
-      <div className="container mx-auto md:px-4 sm:px-1">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-4">
+        <div className="flex items-start justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center  space-x-2 ml-0.5 mt-3">
           <img className="w-20 mr-2" src="https://www.thedesignermonk.in/assets/img/icon/Designer-Monk.svg" alt="" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 mt-4">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -59,7 +59,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 mt-4"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
