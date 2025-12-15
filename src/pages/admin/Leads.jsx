@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronUp, ChevronDown, Eye, Trash2 } from "lucide-react";
+import { ChevronUp, ChevronDown, Eye, Trash2, Search } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import useAdminGuard from "@/hooks/useAdminGuard";
 import { apiService } from "@/config/api";
@@ -12,10 +12,11 @@ export default function Leads() {
   const [sortBy, setSortBy] = useState('createdAt');
   const [sortOrder, setSortOrder] = useState('desc');
   const [selectedLead, setSelectedLead] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchLeads();
-  }, [pagination.page, sortBy, sortOrder]);
+  }, [pagination.page, sortBy, sortOrder, searchTerm]);
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -88,38 +89,50 @@ export default function Leads() {
   return (
     <AdminLayout>
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-6">Lead Enquiries</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold">Lead Enquiries</h1>
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <input
+              type="text"
+              placeholder="Search leads..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+        </div>
         
         {/* Desktop Table */}
-        <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
+        <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden border border-gray-200">
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full border-collapse">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('name')}>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer border-b border-gray-200" onClick={() => handleSort('name')}>
                     <div className="flex items-center gap-1">
                       Name <SortIcon field="name" />
                     </div>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('email')}>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer border-b border-gray-200" onClick={() => handleSort('email')}>
                     <div className="flex items-center gap-1">
                       Email <SortIcon field="email" />
                     </div>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
                     Phone
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('status')}>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer border-b border-gray-200" onClick={() => handleSort('status')}>
                     <div className="flex items-center gap-1">
                       Status <SortIcon field="status" />
                     </div>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onClick={() => handleSort('createdAt')}>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer border-b border-gray-200" onClick={() => handleSort('createdAt')}>
                     <div className="flex items-center gap-1">
                       Date <SortIcon field="createdAt" />
                     </div>
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
                     Actions
                   </th>
                 </tr>
@@ -127,16 +140,16 @@ export default function Leads() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {leads.map((lead) => (
                   <tr key={lead._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-b border-gray-100">
                       {lead.name}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b border-gray-100">
                       {lead.email}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b border-gray-100">
                       {lead.phone}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap border-b border-gray-100">
                       <select
                         value={lead.status}
                         onChange={(e) => updateLeadStatus(lead._id, e.target.value)}
@@ -149,10 +162,10 @@ export default function Leads() {
                         <option value="closed">Closed</option>
                       </select>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-b border-gray-100">
                       {new Date(lead.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium border-b border-gray-100">
                       <div className="flex gap-2">
                         <button
                           onClick={() => setSelectedLead(lead)}
@@ -174,6 +187,42 @@ export default function Leads() {
             </table>
           </div>
         </div>
+
+        {/* Pagination */}
+        {pagination.pages > 1 && (
+          <div className="mt-6 flex justify-between items-center">
+            <div className="text-sm text-gray-700">
+              Showing {((pagination.page - 1) * pagination.limit) + 1} to {Math.min(pagination.page * pagination.limit, pagination.total)} of {pagination.total} results
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setPagination(prev => ({ ...prev, page: prev.page - 1 }))}
+                disabled={pagination.page === 1}
+                className="px-3 py-1 border rounded disabled:opacity-50 hover:bg-gray-50"
+              >
+                Previous
+              </button>
+              {[...Array(pagination.pages)].map((_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setPagination(prev => ({ ...prev, page: i + 1 }))}
+                  className={`px-3 py-1 border rounded ${
+                    pagination.page === i + 1 ? 'bg-primary text-white' : 'bg-white hover:bg-gray-50'
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setPagination(prev => ({ ...prev, page: prev.page + 1 }))}
+                disabled={pagination.page === pagination.pages}
+                className="px-3 py-1 border rounded disabled:opacity-50 hover:bg-gray-50"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Mobile Cards */}
         <div className="md:hidden space-y-4">

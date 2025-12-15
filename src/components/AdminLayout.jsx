@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { LayoutDashboard, Users, Upload, LogOut } from "lucide-react";
+import MobileMenu from "./MobileMenu";
 
 export default function AdminLayout({ children }) {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ export default function AdminLayout({ children }) {
 
   return (
     <div className="min-h-screen bg-gray-50 md:flex">
+      {/* Mobile Menu */}
+      <MobileMenu />
 
       {/* Sidebar — ONLY visible on desktop */}
       <aside className="hidden md:block fixed inset-y-0 left-0 z-50 w-64 bg-[#0A3A4A] text-white">

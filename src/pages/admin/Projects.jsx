@@ -491,7 +491,7 @@ export default function Projects() {
                 <button
                   type="button"
                   onClick={() => setIsAddingNew(false)}
-                  className="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600"
+                  className="flex-1 bg-gray-500 text-gray py-3 rounded-lg hover:bg-gray-600"
                 >
                   Cancel
                 </button>
@@ -514,8 +514,7 @@ export default function Projects() {
           <div className="bg-white rounded-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <h2 className="text-xl font-bold mb-4">Edit Project</h2>
             
-            <div className="max-h-[70vh] overflow-y-auto pr-2">
-              <form id="edit-form" onSubmit={handleUpdate} className="space-y-4">
+            <form onSubmit={handleUpdate} className="space-y-4 max-h-96 overflow-y-auto">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Title</label>
@@ -742,26 +741,23 @@ export default function Projects() {
                 )}
               </div>
 
-              </form>
-            </div>
-            
-            <div className="flex gap-4 mt-6 pt-4 border-t">
-              <button
-                type="button"
-                onClick={() => setEditingProject(null)}
-                className="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                form="edit-form"
-                disabled={loading}
-                className="flex-1 bg-primary text-white py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50"
-              >
-                {loading ? 'Updating...' : 'Update'}
-              </button>
-            </div>
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => setEditingProject(null)}
+                  className="flex-1 bg-gray-500 text-gray py-3 rounded-lg hover:bg-gray-600"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="flex-1 bg-primary text-white py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50"
+                >
+                  {loading ? 'Updating...' : 'Update'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
