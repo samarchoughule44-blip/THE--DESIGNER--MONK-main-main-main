@@ -525,7 +525,7 @@ useEffect(() => {
 
       <section className="w-full py-6 bg-gray-300/40">
         <div className="mx-auto  rounded-3xl p-5 ">
-          <h2 className="text-2xl md:text-4xl font-bold text-left mb-4">
+          <h2 className="flex justify-center text-2xl md:text-4xl font-bold text-left mb-4">
             Inspiration for home interior designs
           </h2>
           <p className="text-sm flex justify-center text-gray-600 mb-4 pt-3">
@@ -664,7 +664,8 @@ useEffect(() => {
           </div>
 
           {/* ---------------------- DESKTOP VERSION ---------------------- */}
-          <div className="hidden max-w-[81.3vw] mx-auto md:grid grid-cols-12 gap-4 mt-6 ">
+          <div className="hidden md:grid container mx-auto px-4 grid-cols-12 gap-4 mt-6">
+
             {/* Row 1 */}
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
               <img

@@ -16,7 +16,7 @@ import NotFound from "./pages/NotFound";
 import ImageGallery from "./pages/ImageGallery";
 import Login from "./pages/admin/Login";
 import AddDesign from "./pages/admin/Design-add";
-import EditDesign from "./pages/admin/Design-edit";
+
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Leads from "./pages/admin/Leads";
 import Projects from "./pages/admin/Projects";
@@ -54,7 +54,7 @@ const AppContent = () => {
           <Route path="/admin/leads" element={<Leads />} />
           <Route path="/admin/projects" element={<Projects />} />
           <Route path="/admin/designs/add" element={<AddDesign />} />
-          <Route path="/admin/designs/edit/:id" element={<EditDesign />} />
+          
 
           
           
