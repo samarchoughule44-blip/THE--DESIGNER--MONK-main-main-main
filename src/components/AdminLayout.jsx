@@ -67,7 +67,7 @@ export default function AdminLayout({ children }) {
 
     <div className="min-h-screen bg-gray-50 md:flex">
       {/* Mobile Menu */}
-      <MobileMenu />
+      {/* <MobileMenu /> */}
 
       {/* DESKTOP SIDEBAR  */}
       <div className="hidden md:block w-64 shrink-0">
@@ -92,23 +92,35 @@ export default function AdminLayout({ children }) {
       </div>
 
       {/* Hamburger menu */}
-      {open && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setOpen(false)}
-          />
-          <aside className="absolute left-0 top-0 h-full w-64 bg-[#0A3A4A] text-white p-6">
-            <div className="flex justify-between mb-6">
-              <h2 className="text-xl font-bold">Admin Panel</h2>
-              <X onClick={() => setOpen(false)} />
-            </div>
-            <div className="space-y-2">
-              <NavItems />
-            </div>
-          </aside>
-        </div>
-      )}
+      <div className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div
+          className="absolute inset-0 bg-black/40 transition-opacity duration-300"
+          onClick={() => setOpen(false)}
+        />
+        <aside className={`absolute left-0 top-0 h-full w-64 bg-[#0A3A4A] text-white p-6 transform transition-transform duration-300 ease-in-out ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold">Admin Panel</h2>
+            <button onClick={() => setOpen(false)} className="p-1 hover:bg-white/10 rounded">
+              <X size={20} />
+            </button>
+          </div>
+          <div className="space-y-2">
+            <NavItems />
+          </div>
+          
+          <div className="absolute bottom-6 left-6 right-6">
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-4 py-3 bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+            >
+              <LogOut size={18} />
+              Logout
+            </button>
+          </div>
+        </aside>
+      </div>
 
       {/* MAIN CONTENT */}
       <div className="flex-1 min-w-0">
