@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronUp, ChevronDown, Eye, Trash2, Search } from "lucide-react";
+import { ChevronUp, ChevronDown, Eye, Trash2, Search, X } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import useAdminGuard from "@/hooks/useAdminGuard";
 import { apiService } from "@/config/api";
@@ -304,8 +304,16 @@ export default function Leads() {
         {/* Lead Detail Modal */}
         {selectedLead && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full">
-              <h2 className="text-xl font-bold mb-4">Lead Details</h2>
+            <div className="bg-white rounded-lg p-6 max-w-md w-full relative">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">Lead Details</h2>
+                <button
+                  onClick={() => setSelectedLead(null)}
+                  className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X size={20} className="text-gray-500" />
+                </button>
+              </div>
               <div className="space-y-3">
                 <div>
                   <label className="font-medium">Name:</label>
@@ -334,7 +342,7 @@ export default function Leads() {
               </div>
               <button
                 onClick={() => setSelectedLead(null)}
-                className="mt-4 w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600"
+                className="mt-4 w-full bg-gray-500 text-grey py-2 rounded hover:bg-gray-600"
               >
                 Close
               </button>
