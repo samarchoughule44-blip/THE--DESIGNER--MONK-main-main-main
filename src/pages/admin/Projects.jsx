@@ -518,11 +518,11 @@ export default function Projects() {
 
       {/* Edit Modal */}
       {editingProject && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
-          <div className="bg-white rounded-xl p-4 sm:p-6 w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto relative">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto relative">
             
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg sm:text-xl font-bold">Edit Project</h2>
+              <h2 className="text-xl font-bold">Edit Project</h2>
               <button
                 onClick={() => setEditingProject(null)}
                 className="p-1 hover:bg-gray-100 rounded-full transition-colors"
@@ -531,8 +531,8 @@ export default function Projects() {
               </button>
             </div>
             
-            <form onSubmit={handleUpdate} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleUpdate} className="space-y-4 max-h-96 overflow-y-auto">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Title</label>
                   <input
@@ -555,7 +555,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Category</label>
                   <select
@@ -758,11 +758,11 @@ export default function Projects() {
                 )}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex gap-4">
                 <button
                   type="button"
                   onClick={() => setEditingProject(null)}
-                  className="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600"
+                  className="flex-1 bg-gray-500 text-gray py-3 rounded-lg hover:bg-gray-600"
                 >
                   Cancel
                 </button>
