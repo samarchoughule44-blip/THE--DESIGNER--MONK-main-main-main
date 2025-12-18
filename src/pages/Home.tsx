@@ -1082,10 +1082,10 @@ useEffect(() => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-[#0000]/75"></div>
 
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-6xl font-bold mb-6">
             Ready to Transform Your Home?
           </h2>
-          <p className="text-xl mb-8 opacity-95 max-w-2xl mx-auto">
+          <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
             Book a free consultation today and let's bring your vision to life
           </p>
 
