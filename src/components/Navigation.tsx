@@ -36,7 +36,7 @@ const Navigation = () => {
         <div className="flex items-start justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center  space-x-2 ml-0.5 mt-3">
-          <img className="w-20 mr-2" src="https://www.thedesignermonk.in/assets/img/icon/Designer-Monk.svg" alt="" />
+          <img className="w-20 mr-2" src="/assets/Compress-images/Designer-Monk.svg" alt="THE DESIGNER MONK Logo" />
           </Link>
 
           {/* Desktop Navigation */}
