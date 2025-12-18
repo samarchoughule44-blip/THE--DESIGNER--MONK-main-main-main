@@ -39,8 +39,14 @@ import "swiper/css/effect-fade";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+
 const Home = () => {
   const navigate = useNavigate();
+  const goToPortfolio = (category) => {
+    navigate(`/portfolio?category=${category}`);
+  };
+  
+
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -54,83 +60,80 @@ const Home = () => {
     }
   }, []);
 
-   gsap.registerPlugin(ScrollTrigger);
-
-useEffect(() => {
   gsap.registerPlugin(ScrollTrigger);
 
-  const animate = (targets, vars) => {
-    gsap.utils.toArray(targets).forEach((el) => {
-      if (el instanceof HTMLElement) {
-        gsap.from(el, {
-          opacity: 0,
-          y: 40,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-          },
-          ...vars,
-        });
-      }
-    });
-  };
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
 
-  // Headings — fade + lift
-  animate("h1, h2, h3", { y: 30 });
-
-  // Paragraphs — smooth fade
-  animate("p", { y: 20, duration: 0.8 });
-
-  // Images — zoom-in effect
-  animate("img", { scale: 0.95, duration: 1.2 });
-
-  // Cards (Why Choose Us, Testimonials, Projects)
-  animate(".card, .Card, .shadow-lg, .rounded-xl", {
-    y: 40,
-    duration: 1,
-  });
-
-  ScrollTrigger.refresh();
-}, []);
-
-
-
-useEffect(() => {
-  gsap.utils.toArray(".ripple-btn").forEach((btn) => {
-    const circle = document.createElement("span");
-    circle.classList.add("ripple-circle");
-    btn.appendChild(circle);
-
-    const size = btn.offsetWidth * 2;
-    circle.style.width = `${size}px`;
-    circle.style.height = `${size}px`;
-
-    btn.addEventListener("mouseenter", () => {
-      gsap.fromTo(
-        circle,
-        { scale: 0, opacity: 0.6 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
+    const animate = (targets, vars) => {
+      gsap.utils.toArray(targets).forEach((el) => {
+        if (el instanceof HTMLElement) {
+          gsap.from(el, {
+            opacity: 0,
+            y: 40,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+            },
+            ...vars,
+          });
         }
-      );
+      });
+    };
+
+    // Headings — fade + lift
+    animate("h1, h2, h3", { y: 30 });
+
+    // Paragraphs — smooth fade
+    animate("p", { y: 20, duration: 0.8 });
+
+    // Images — zoom-in effect
+    animate("img", { scale: 0.95, duration: 1.2 });
+
+    // Cards (Why Choose Us, Testimonials, Projects)
+    animate(".card, .Card, .shadow-lg, .rounded-xl", {
+      y: 40,
+      duration: 1,
     });
 
-    btn.addEventListener("mouseleave", () => {
-      gsap.to(circle, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.inOut",
+    ScrollTrigger.refresh();
+  }, []);
+
+  useEffect(() => {
+    gsap.utils.toArray(".ripple-btn").forEach((btn) => {
+      const circle = document.createElement("span");
+      circle.classList.add("ripple-circle");
+      btn.appendChild(circle);
+
+      const size = btn.offsetWidth * 2;
+      circle.style.width = `${size}px`;
+      circle.style.height = `${size}px`;
+
+      btn.addEventListener("mouseenter", () => {
+        gsap.fromTo(
+          circle,
+          { scale: 0, opacity: 0.6 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          }
+        );
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        gsap.to(circle, {
+          scale: 0,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.inOut",
+        });
       });
     });
-  });
-}, []);
-
+  }, []);
 
   const categories = [
     {
@@ -394,7 +397,10 @@ useEffect(() => {
       </section>
       {/* contact form */}
       <section className="relative py-6 md:py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${bedroomImage})` }} />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${bedroomImage})` }}
+        />
         <div className="absolute inset-0 bg-amber-50/90" />
         <div className="container mx-auto px-2 md:px-4 relative z-10">
           <div className="max-w-2xl mx-auto">
@@ -407,31 +413,37 @@ useEffect(() => {
             </p>
 
             <Card className="p-2 md:p-6">
-              <form onSubmit={async (e) => {
-                e.preventDefault();
-                const formData = new FormData(e.target as HTMLFormElement);
-                const countryCode = formData.get('countryCode');
-                const phone = formData.get('phone');
-                try {
-                  const response = await fetch('https://super-disco-the-designer-monk-production.up.railway.app/api/leads', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      name: formData.get('name'),
-                      email: 'noemail@provided.com',
-                      phone: `${countryCode}${phone}`,
-                      message: `Pin Code: ${formData.get('pincode')}`,
-                      source: 'Home Page Consultation'
-                    })
-                  });
-                  if (response.ok) {
-                    alert('Consultation request submitted successfully!');
-                    (e.target as HTMLFormElement).reset();
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.target as HTMLFormElement);
+                  const countryCode = formData.get("countryCode");
+                  const phone = formData.get("phone");
+                  try {
+                    const response = await fetch(
+                      "https://super-disco-the-designer-monk-production.up.railway.app/api/leads",
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          name: formData.get("name"),
+                          email: "noemail@provided.com",
+                          phone: `${countryCode}${phone}`,
+                          message: `Pin Code: ${formData.get("pincode")}`,
+                          source: "Home Page Consultation",
+                        }),
+                      }
+                    );
+                    if (response.ok) {
+                      alert("Consultation request submitted successfully!");
+                      (e.target as HTMLFormElement).reset();
+                    }
+                  } catch (error) {
+                    alert("Failed to submit request. Please try again.");
                   }
-                } catch (error) {
-                  alert('Failed to submit request. Please try again.');
-                }
-              }} className="space-y-4 md:space-y-6">
+                }}
+                className="space-y-4 md:space-y-6"
+              >
                 <div>
                   <input
                     name="name"
@@ -443,7 +455,10 @@ useEffect(() => {
                 </div>
 
                 <div className="flex gap-2">
-                  <select name="countryCode" className="p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white text-sm md:text-base">
+                  <select
+                    name="countryCode"
+                    className="p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white text-sm md:text-base"
+                  >
                     <option value="+91">🇮🇳 +91</option>
                     <option value="+1">🇺🇸 +1</option>
                     <option value="+44">🇬🇧 +44</option>
@@ -537,13 +552,13 @@ useEffect(() => {
           <div className="md:hidden overflow-x-auto pb-3 scrollbar-mobile">
             <div className="grid grid-cols-4 gap-3 w-[850px]">
               {/* FIRST ROW */}
+
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
+                  onClick={() => goToPortfolio("BEDROOM")}
                   src={dsc06643}
                   className="w-full h-full object-cover"
                 />
-
                 <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
                   Master Bedroom
                 </span>
@@ -551,8 +566,8 @@ useEffect(() => {
 
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
-                  src={dsc06676}
+                  onClick={() => goToPortfolio("FALSE CEILING")}
+                  src="/assets/Compress-images/false-ceiling.jpg"
                   className="w-full h-full object-cover"
                 />
 
@@ -563,8 +578,8 @@ useEffect(() => {
 
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
-                  src={dsc06716}
+                  onClick={() => goToPortfolio("HOME OFFICE")}
+                  src="/assets/Compress-images/Home-Office.jpg"
                   className="w-full h-full object-cover"
                 />
 
@@ -575,8 +590,8 @@ useEffect(() => {
 
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
-                  src={dsc06725}
+                  onClick={() => goToPortfolio("FOYER ROOM")}
+                  src="/assets/Compress-images/Foyer-Room.jpg"
                   className="w-full h-full object-cover"
                 />
 
@@ -589,7 +604,7 @@ useEffect(() => {
               <div className="col-span-4 flex gap-3">
                 <div className="w-[420px] h-[200px] bg-gray-300 rounded-xl relative overflow-hidden">
                   <img
-                    onClick={() => navigate("/services")}
+                    onClick={() => goToPortfolio("KITCHEN")}
                     className="h-full w-full object-cover"
                     src={dsc06769}
                   />
@@ -601,9 +616,9 @@ useEffect(() => {
 
                 <div className="w-[420px] h-[200px] bg-gray-300 rounded-xl relative overflow-hidden">
                   <img
-                    onClick={() => navigate("/services")}
+                    onClick={() => goToPortfolio("LIVING ROOM")}
                     className="h-full w-full object-cover"
-                    src={dsc06781}
+                    src="/assets/Compress-images/livingroom7.jpg"
                   />
 
                   <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
@@ -615,7 +630,7 @@ useEffect(() => {
               {/* THIRD ROW */}
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
+                  onClick={() => goToPortfolio("DINING ROOM")}
                   src={dsc06788}
                   className="w-full h-full object-cover"
                 />
@@ -627,8 +642,8 @@ useEffect(() => {
 
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
-                  src={dsc06796}
+                  onClick={() => goToPortfolio("KIDS ROOM")}
+                  src="/assets/Compress-images/bedroom4.jpg"
                   className="w-full h-full object-cover"
                 />
 
@@ -639,8 +654,8 @@ useEffect(() => {
 
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
-                  src={dsc06807}
+                  onClick={() => goToPortfolio("WARDROBE DESIGN")}
+                  src="/assets/Compress-images/wardrobe.jpg"
                   className="w-full h-full object-cover"
                 />
 
@@ -651,8 +666,8 @@ useEffect(() => {
 
               <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
                 <img
-                  onClick={() => navigate("/services")}
-                  src={dsc06818}
+                  onClick={() => goToPortfolio("ALL")}
+                  src="/assets/Compress-images/house.jpg"
                   className="w-full h-full object-cover"
                 />
 
@@ -665,12 +680,11 @@ useEffect(() => {
 
           {/* ---------------------- DESKTOP VERSION ---------------------- */}
           <div className="hidden md:grid container mx-auto px-4 grid-cols-12 gap-4 mt-6">
-
             {/* Row 1 */}
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
+                onClick={() => goToPortfolio("BEDROOM")}
+                src="/assets/Compress-images/masterbedroom5.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -680,8 +694,8 @@ useEffect(() => {
 
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src="https://images.unsplash.com/photo-1586105251261-72a756497a11"
+               onClick={() => goToPortfolio("FALSE CEILING")}
+                src="/assets/Compress-images/false-ceiling.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -691,8 +705,8 @@ useEffect(() => {
 
             <div className="col-span-4 h-[200px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src={bedroomImage}
+                onClick={() => goToPortfolio("HOME OFFICE")}
+                src="/assets/Compress-images/Home-Office.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -703,8 +717,8 @@ useEffect(() => {
             {/* Row 2 */}
             <div className="col-span-6 h-[250px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src={bedroomImage}
+                onClick={() => goToPortfolio("KITCHEN")}
+                src="/assets/Compress-images/kitchen9.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -714,8 +728,8 @@ useEffect(() => {
 
             <div className="col-span-6 h-[250px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353"
+                onClick={() => goToPortfolio("LIVING ROOM")}
+                src="/assets/Compress-images/livingroom7.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -726,8 +740,8 @@ useEffect(() => {
             {/* Row 3 */}
             <div className="col-span-3 h-[180px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src={bedroomImage}
+                onClick={() => goToPortfolio("KIDS ROOM")}
+                src="/assets/Compress-images/bedroom4.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -737,8 +751,8 @@ useEffect(() => {
 
             <div className="col-span-3 h-[180px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src={bedroomImage}
+                onClick={() => goToPortfolio("WARDROBE DESIGN")}
+                src="/assets/Compress-images/wardrobe.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -748,19 +762,19 @@ useEffect(() => {
 
             <div className="col-span-3 h-[180px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src={bedroomImage}
+                 onClick={() => goToPortfolio("FOYER")}
+                src="/assets/Compress-images/Foyer-Room.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
-                Kids ROom
+                Foyer Room
               </span>
             </div>
 
             <div className="col-span-3 h-[180px] rounded-xl relative overflow-hidden">
               <img
-                onClick={() => navigate("/services")}
-                src={bedroomImage}
+                 onClick={() => goToPortfolio("All")}
+                src="/assets/Compress-images/house.jpg"
                 className="w-full h-full object-cover"
               />
               <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
@@ -884,7 +898,10 @@ useEffect(() => {
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {steps.map((step, index) => (
-                <div key={index} className="relative flex flex-col items-center md:block">
+                <div
+                  key={index}
+                  className="relative flex flex-col items-center md:block"
+                >
                   {/* Step Circle */}
                   <div className="flex flex-col items-center text-center">
                     <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl font-bold mb-4 relative z-10">
@@ -1021,7 +1038,7 @@ useEffect(() => {
               <div
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all ${
-                  index === 0 ? 'bg-primary w-8' : 'bg-gray-300'
+                  index === 0 ? "bg-primary w-8" : "bg-gray-300"
                 }`}
               />
             ))}

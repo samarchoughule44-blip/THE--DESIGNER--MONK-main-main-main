@@ -8,20 +8,18 @@ import {
   bedroomImage,
   wardrobeImage,
 } from "@/assets";
-
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 type ProjectCategory =
   | "All"
   | "BEDROOM"
+  | "FALSE CEILING"
+  | "HOME OFFICE"
   | "KITCHEN"
-  | "LIVINGROOM"
-  | "BATHROOM"
-  | "WARDROBE"
-  | "FULLHOME"
-  | "COMPACTKITCHEN"
-  | "CUSTOMWARDROBE"
-  | "SERENEBEDROOM"
-  | "ELEGANTLIVINGSPACE"
-  | "CONTEMPORARYKITCHEN";
+  | "LIVING ROOM"
+  | "KIDS ROOM"
+  | "WARDROBE DESIGN"
+  | "FOYER";
 
 interface Project {
   id: number;
@@ -36,7 +34,20 @@ interface Project {
 }
 
 const Portfolio = () => {
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory>("All");
+  const [searchParams] = useSearchParams();
+
+const urlCategory = searchParams.get("category");
+
+const [activeCategory, setActiveCategory] = useState<ProjectCategory>(() => {
+  return (urlCategory as ProjectCategory) || "All";
+});
+
+useEffect(() => {
+  if (urlCategory) {
+    setActiveCategory(urlCategory as ProjectCategory);
+  }
+}, [urlCategory]);
+
 
   const projects: Project[] = [
     {
@@ -116,14 +127,14 @@ const Portfolio = () => {
   const categories: ProjectCategory[] = [
     "All",
     "BEDROOM",
+    "FALSE CEILING",
+    "HOME OFFICE",
     "KITCHEN",
-    "LIVINGROOM",
-    "BATHROOM",
-    "WARDROBE",
-    "COMPACTKITCHEN",
-    "CUSTOMWARDROBE",
-    "SERENEBEDROOM",
-    "CONTEMPORARYKITCHEN",
+    "LIVING ROOM",
+    "KIDS ROOM",
+    "WARDROBE DESIGN",
+    "FOYER",
+    
   ];
 
   const filteredProjects =
