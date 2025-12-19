@@ -1,54 +1,36 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import { dsc06643 } from "@/assets";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isRegister, setIsRegister] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setErr("");
     setLoading(true);
 
-    if (isRegister && password !== confirmPassword) {
-      setErr("Passwords do not match");
-      setLoading(false);
-      return;
-    }
-
     try {
-      const endpoint = isRegister ? '/register' : '/login';
-      const response = await fetch(`https://super-disco-the-designer-monk-production.up.railway.app/api/auth${endpoint}`, {
+      const response = await fetch(`https://super-disco-the-designer-monk-production.up.railway.app/api/auth/login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          email, 
-          password,
-          ...(isRegister && { role: 'admin' })
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       });
       
       const data = await response.json();
       
       if (response.ok) {
-        if (isRegister) {
-          setErr("");
-          setIsRegister(false);
-          alert("User created successfully! Please login.");
-        } else {
-          localStorage.setItem("adminToken", data.token);
-          localStorage.setItem("isAdminLoggedIn", "true");
-          navigate("/admin/dashboard");
-        }
+        localStorage.setItem("adminToken", data.token);
+        localStorage.setItem("isAdminLoggedIn", "true");
+        navigate("/admin/dashboard");
       } else {
-        setErr(data.error || `${isRegister ? 'Registration' : 'Login'} failed`);
+        setErr(data.error || 'Login failed');
       }
     } catch (error) {
       setErr("Network error. Please try again.");
@@ -58,80 +40,82 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0A3A4A] to-[#5F8F9F] p-4">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-[#0A3A4A] mb-2">Admin Portal</h1>
-          <p className="text-gray-600">{isRegister ? 'Create admin account' : 'Sign in to access dashboard'}</p>
-        </div>
-
-        {err && (
-          <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6 text-sm">
-            {err}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-            <input
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5F8F9F] focus:border-transparent"
-              placeholder="admin@example.com"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-            <input
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5F8F9F] focus:border-transparent"
-              placeholder="••••••••"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          {isRegister && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-              <input
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5F8F9F] focus:border-transparent"
-                placeholder="••••••••"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
+    <div className="min-h-screen px-2" style={{
+      // backgroundImage: `url(${dsc06643})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
+      <div className="min-h-screen flex items-center">
+        <div className="w-full max-w-md ml-auto mr-4 lg:mr-16">
+          <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20">
+            <div className="text-center mb-6">
+              <img src="/assets/Compress-images/Vector.svg" alt="The Designer Monk" className="h-12 mx-auto mb-4" />
+              <h5 className="text-xl font-semibold mb-2">Welcome to Designer Monk</h5>
+              <p className="text-gray-600 text-sm">Sign in to access your secure admin dashboard.</p>
             </div>
-          )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-[#0A3A4A] text-white py-3 rounded-lg font-semibold hover:bg-[#5F8F9F] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? (isRegister ? "Creating..." : "Signing in...") : (isRegister ? "Create Account" : "Sign In")}
-          </button>
-        </form>
+            {err && (
+              <div className="bg-red-50 border-l-4 border-red-400 text-red-700 p-3 rounded-r-lg mb-4 text-sm">
+                {err}
+              </div>
+            )}
 
-        <div className="mt-6 text-center">
-          <button
-            onClick={() => {
-              setIsRegister(!isRegister);
-              setErr("");
-              setEmail("");
-              setPassword("");
-              setConfirmPassword("");
-            }}
-            className="text-[#5F8F9F] hover:text-[#0A3A4A] transition-colors"
-          >
-            {isRegister ? "Already have an account? Sign In" : "Need an account? Register"}
-          </button>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F8F9F] focus:border-transparent outline-none transition"
+                  placeholder="info@thedesignermonk.com"
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#5F8F9F] focus:border-transparent outline-none transition pr-12"
+                    placeholder="********"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <div className="flex justify-between items-center">
+                  <label className="flex items-center">
+                    <input type="checkbox" className="mr-2 rounded" />
+                    <span className="text-sm text-gray-600">Remember Me</span>
+                  </label>
+                  <a href="#" className="text-[#5F8F9F] text-sm hover:underline">Forgot Password?</a>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-[#0A3A4A] text-white py-3 rounded-lg font-medium hover:bg-[#5F8F9F] transition disabled:opacity-50"
+                >
+                  {loading ? "Signing in..." : "Login"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
