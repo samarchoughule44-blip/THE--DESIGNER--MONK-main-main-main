@@ -73,7 +73,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone",
-      detail: "+91 98765 43210",
+      detail: "+91 98678 89580",
       subdetail: "Mon-Sat, 9:00 AM - 7:00 PM",
     },
     {
@@ -263,13 +263,13 @@ const Contact = () => {
               Most clients hear back from us within 24 hours. For urgent inquiries, please call us directly.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <a href="tel:+919876543210">
+              <a href="tel:+91 98678 89580">
                 <Button variant="outline" size="lg">
                   <Phone className="mr-2" size={18} />
                   Call Now
                 </Button>
               </a>
-              <a href="mailto:hello@thedesignermonk.com">
+              <a href="mailto:Support@thedesignermonk.in">
                 <Button variant="outline" size="lg">
                   <Mail className="mr-2" size={18} />
                   Email Us

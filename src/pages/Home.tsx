@@ -1093,7 +1093,7 @@ const Home = () => {
           preload="metadata"
           poster="/assets/video/poster.jpg"
         >
-          <source src="/assets/video/video.mp4" type="video/mp4" />
+          <source src="/assets/Compress-images/video1.mp4" type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-[#0000]/75"></div>
