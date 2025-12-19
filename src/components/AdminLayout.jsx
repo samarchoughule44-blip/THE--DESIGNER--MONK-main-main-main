@@ -12,7 +12,7 @@ export default function AdminLayout({ children }) {
 
   function handleLogout() {
     localStorage.clear();
-    navigate("/admin/login");
+    navigate("/admin");
   }
 
   const NavItems = () => (
