@@ -95,16 +95,20 @@ const About = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              <img
-                src={professionalImage}
-                alt="Swapnil Kadam - Principal Designer"
-                className="w-full h-96 object-cover rounded-2xl shadow-lg"
-              />
+            <div className="lg:order-1">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 lg:hidden">Meet Our Principal Designer</h2>
+              <h3 className="text-xl font-semibold text-primary mb-6 lg:hidden">Swapnil Kadam</h3>
+              <div className="relative">
+                <img
+                  src={professionalImage}
+                  alt="Swapnil Kadam - Principal Designer"
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
             </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet Our Principal Designer</h2>
-              <h3 className="text-xl font-semibold text-primary mb-6">Swapnil Kadam</h3>
+            <div className="lg:order-2">
+              <h2 className="hidden lg:block text-3xl md:text-4xl font-bold mb-4">Meet Our Principal Designer</h2>
+              <h3 className="hidden lg:block text-xl font-semibold text-primary mb-6">Swapnil Kadam</h3>
               <div className="space-y-4 text-muted-foreground font-dm-sans">
                 <p>
                   With over 5 years of experience in interior design, Swapnil Kadam leads The Designer Monk with a vision to create spaces that are both beautiful and functional. His expertise spans residential and commercial projects, with a special focus on modern and contemporary designs.
