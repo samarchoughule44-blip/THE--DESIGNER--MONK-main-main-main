@@ -73,7 +73,7 @@ const Home = () => {
             opacity: 0,
             y: 40,
             duration: 1,
-            ease: "power3.out",
+            ease: "power2.out",
             scrollTrigger: {
               trigger: el,
               start: "top 85%",
@@ -85,19 +85,40 @@ const Home = () => {
     };
 
     // Headings — fade + lift
-    animate("h1, h2, h3", { y: 30 });
+animate("h1, h2, h3", { 
+  y: 30, 
+  duration: 0.6 
+});
 
-    // Paragraphs — smooth fade
-    animate("p", { y: 20, duration: 0.8 });
+// Paragraphs — smooth fade
+animate("p", { 
+  y: 20, 
+  duration: 0.5 
+});
 
-    // Images — zoom-in effect
-    animate("img", { scale: 0.95, duration: 1.2 });
+// Buttons 
+animate("button", {
+  opacity: [0, 1],
+  y: [5, 0],
+  duration: 0.4,
+  delay: 0.1,
+  stagger: true,
+});
 
-    // Cards (Why Choose Us, Testimonials, Projects)
-    animate(".card, .Card, .shadow-lg, .rounded-xl", {
-      y: 40,
-      duration: 1,
-    });
+
+
+// Images — zoom-in effect
+animate("img", { 
+  scale: 0.95, 
+  duration: 0.8 
+});
+
+// Cards
+animate(".card, .Card, .shadow-lg, .rounded-xl", {
+  y: 40,
+  duration: 0.8,
+});
+
 
     ScrollTrigger.refresh();
   }, []);
@@ -117,10 +138,10 @@ const Home = () => {
           circle,
           { scale: 0, opacity: 0.6 },
           {
-            scale: 1,
+            scale: .8,
             opacity: 1,
-            duration: 0.6,
-            ease: "power2.out",
+            duration: 0.3,
+            ease: "power1.inOut",
           }
         );
       });
@@ -129,8 +150,8 @@ const Home = () => {
         gsap.to(circle, {
           scale: 0,
           opacity: 0,
-          duration: 0.4,
-          ease: "power2.inOut",
+          duration: 0.2,
+          ease: "power1.inOut",
         });
       });
     });
@@ -488,7 +509,7 @@ const Home = () => {
 
                 <Button
                   type="submit"
-                  className="w-full py-3 text-base md:py-4 md:text-lg rounded-xl"
+                  className="w-full py-3 text-base md:py-4 md:text-lg rounded-full button"
                 >
                   Get Free Consultation
                 </Button>
@@ -1223,7 +1244,7 @@ const Home = () => {
       </section>
 
       {/* Contact Popup - Mobile Only */}
-      {/* {showPopup && (
+      {showPopup && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-6 max-w-md w-full relative">
             <button
@@ -1253,7 +1274,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };

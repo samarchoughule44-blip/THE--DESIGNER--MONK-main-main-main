@@ -47,8 +47,8 @@ export default function AdminLogin() {
       backgroundRepeat: 'no-repeat'
     }}>
       <div className="min-h-screen flex items-center">
-        <div className="w-full max-w-md ml-auto mr-4 lg:mr-16">
-          <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20">
+        <div className="w-full max-w-md mx-auto px-4 ">
+          <div className="bg-[#467d8f]/50 rounded-3xl shadow-2xl p-8 border broder-gray-400/20 ">
             <div className="text-center mb-6">
               <img src="/assets/Compress-images/Vector.svg" alt="The Designer Monk" className="h-12 mx-auto mb-4" />
               <h5 className="text-xl font-semibold mb-2">Welcome to Designer Monk</h5>
