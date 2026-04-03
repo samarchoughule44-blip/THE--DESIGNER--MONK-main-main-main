@@ -45,20 +45,23 @@ const About = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative h-[500px] overflow-hidden">
+      <section className="relative min-h-[500px] md:min-h-[550px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-primary/80 to-primary/40" />
-        
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-primary-foreground px-4">
-          <h1 className="text-3xl md:text-5xl font-bold mb-6">
-            About The Designer Monk
-          </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
-            Transforming spaces, creating dreams, and building lasting relationships through exceptional interior design
-          </p>
+        <div className="absolute inset-0 bg-black/60" />
+
+        <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col justify-center min-h-[500px] md:min-h-[550px]">
+          <div className="text-white max-w-xl">
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
+              About The{" "}
+              <span className="text-[#F5A623]">Designer Monk</span>
+            </h1>
+            <p className="text-base md:text-lg opacity-90 font-dm-sans">
+              Transforming spaces, creating dreams, and building lasting relationships through exceptional interior design
+            </p>
+          </div>
         </div>
       </section>
 

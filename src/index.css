@@ -8,105 +8,83 @@
   }
 }
 
-
-html, body{
-
+html, body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
   scrollbar-width: thin;
-  scrollbar-color: #59947C;
+  scrollbar-color: #FD7979 transparent;
   background: transparent;
   overflow-x: hidden;
-  
 }
-
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 20%;
+    --foreground: 20 10% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 20%;
+    --card-foreground: 20 10% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 20%;
+    --popover-foreground: 20 10% 15%;
 
-    --primary: 199 76% 23%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 97% 73%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 100% 48%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 95% 83%;
+    --secondary-foreground: 20 10% 20%;
 
-    --muted: 0 0% 97%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 30 96% 89%;
+    --muted-foreground: 20 8% 42%;
 
-    --accent: 40 100% 48%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 7 100% 90%;
+    --accent-foreground: 20 10% 15%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 199 76% 23%;
+    --border: 20 20% 90%;
+    --input: 20 20% 90%;
+    --ring: 0 97% 73%;
 
     --radius: 0.75rem;
 
-    /* Custom design tokens */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 0 97% 73%;
   }
 
   .dark {
-    --background: 199 76% 23%;
+    --background: 20 10% 10%;
     --foreground: 0 0% 98%;
-
-    --card: 199 70% 20%;
+    --card: 20 8% 14%;
     --card-foreground: 0 0% 98%;
-
-    --popover: 199 70% 20%;
+    --popover: 20 8% 14%;
     --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 199 76% 23%;
-
-    --secondary: 40 100% 48%;
-    --secondary-foreground: 0 0% 98%;
-
-    
-    --muted: 199 60% 12%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 40 100% 48%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
+    --primary: 0 97% 73%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 95% 83%;
+    --secondary-foreground: 20 10% 15%;
+    --muted: 20 8% 18%;
+    --muted-foreground: 20 5% 60%;
+    --accent: 7 100% 90%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
-
-    --border: 199 60% 30%;
-    --input: 199 60% 30%;
-    --ring: 0 0% 98%;
+    --border: 20 8% 22%;
+    --input: 20 8% 22%;
+    --ring: 0 97% 73%;
   }
 }
 
@@ -114,27 +92,18 @@ html, body{
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-raleway font-semibold;
   }
 }
-
 
 @font-face {
   font-family: "raleway";
   src: url("/assets/fonts/font-logo.ttf") format("ttf");
 }
-
 
 .marquee {
   display: flex;
@@ -143,49 +112,22 @@ html, body{
 }
 
 @keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
-::-webkit-scrollbar {
-  width: 8px;              
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;  
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: #FD7979; border-radius: 10px; }
 
-::-webkit-scrollbar-thumb {
-  background-color: #59947C;
-  border-radius: 10px;
-}
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE & Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;             /* Chrome, Safari, Edge */
-} 
-
-.ripple-btn {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
+.ripple-btn { position: relative; overflow: hidden; isolation: isolate; }
 .ripple-circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background: #f4cf00; 
+  position: absolute; top: 50%; left: 50%;
+  background: #FFCDC9;
   border-radius: 50%;
   transform: translate(-50%, -50%) scale(0);
-  pointer-events: none;
-  z-index: -1;
+  pointer-events: none; z-index: -1;
 }

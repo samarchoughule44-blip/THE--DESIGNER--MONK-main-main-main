@@ -18,32 +18,165 @@ const Services = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [visibleProjects, setVisibleProjects] = useState(4);
   const [loading, setLoading] = useState(false);
-  const [projects, setProjects] = useState([]);
-  const [deliveredProjects, setDeliveredProjects] = useState([]);
-  const [upcomingProjects, setUpcomingProjects] = useState([]);
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  const deliveredProjects = [
+    {
+      _id: "1",
+      title: "Luxury 4BHK Apartment",
+      projectName: "Oberoi Skycity",
+      imageUrl: "/assets/Compress-images/livingroom2.jpg",
+      style: "Modern Contemporary",
+      category: "Residential",
+      layout: "Open Plan",
+      location: "Mumbai, Borivali",
+      pricing: "18",
+      bhk: "4 BHK",
+      scope: "Full Home Interior",
+      propertyType: "Apartment",
+      size: "1800 sq.ft",
+      priceMin: 1500000,
+      priceMax: 2000000,
+    },
+    {
+      _id: "2",
+      title: "Elegant 2BHK Flat",
+      projectName: "Shivaji Residency",
+      imageUrl: "/assets/Compress-images/kitchen1.jpg",
+      style: "Minimalist",
+      category: "Residential",
+      layout: "Compact",
+      location: "Pune, Shivaji Nagar",
+      pricing: "8",
+      bhk: "2 BHK",
+      scope: "Kitchen & Living Room",
+      propertyType: "Flat",
+      size: "950 sq.ft",
+      priceMin: 600000,
+      priceMax: 900000,
+    },
+    {
+      _id: "3",
+      title: "Cozy Master Bedroom",
+      projectName: "Palm Heights",
+      imageUrl: "/assets/Compress-images/masterbedroom1.jpg",
+      style: "Zen Minimalist",
+      category: "Residential",
+      layout: "L-Shaped",
+      location: "Delhi, Karol Bagh",
+      pricing: "5",
+      bhk: "3 BHK",
+      scope: "Bedroom Design",
+      propertyType: "Villa",
+      size: "1400 sq.ft",
+      priceMin: 400000,
+      priceMax: 600000,
+    },
+    {
+      _id: "4",
+      title: "Modern Kitchen Redesign",
+      projectName: "Lodha Palava",
+      imageUrl: "/assets/Compress-images/kitchen9.jpg",
+      style: "Modern Functional",
+      category: "Residential",
+      layout: "U-Shaped",
+      location: "Mumbai, Dombivli",
+      pricing: "6",
+      bhk: "3 BHK",
+      scope: "Modular Kitchen",
+      propertyType: "Apartment",
+      size: "1200 sq.ft",
+      priceMin: 400000,
+      priceMax: 700000,
+    },
+    {
+      _id: "5",
+      title: "Spacious Living Room",
+      projectName: "Hiranandani Gardens",
+      imageUrl: "/assets/Compress-images/livingroom7.jpg",
+      style: "Luxury Contemporary",
+      category: "Residential",
+      layout: "Open Plan",
+      location: "Mumbai, Powai",
+      pricing: "12",
+      bhk: "3 BHK",
+      scope: "Living & Dining",
+      propertyType: "Apartment",
+      size: "1500 sq.ft",
+      priceMin: 1000000,
+      priceMax: 1400000,
+    },
+    {
+      _id: "6",
+      title: "Dining Area Makeover",
+      projectName: "Runwal Forest",
+      imageUrl: "/assets/Compress-images/diningarea.jpg",
+      style: "Classic Elegant",
+      category: "Residential",
+      layout: "Rectangular",
+      location: "Mumbai, Kanjurmarg",
+      pricing: "4",
+      bhk: "2 BHK",
+      scope: "Dining Room",
+      propertyType: "Flat",
+      size: "850 sq.ft",
+      priceMin: 300000,
+      priceMax: 500000,
+    },
+  ];
 
-  const fetchProjects = async () => {
-    try {
-      const response = await fetch('https://super-disco-the-designer-monk-production.up.railway.app/api/projects');
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data, "fetchProjects");
-        
-        // Handle nested response structure
-        const projectsArray = data.projects || data || [];
-        
-        setProjects(projectsArray);
-        setDeliveredProjects(projectsArray.filter(project => project.status === 'delivered'));
-        setUpcomingProjects(projectsArray.filter(project => project.status === 'upcoming'));
-      }
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    }
-  };
+  const upcomingProjects = [
+    {
+      _id: "7",
+      title: "Premium 3BHK Villa",
+      projectName: "Godrej Platinum",
+      imageUrl: "/assets/Compress-images/bedroom1.jpg",
+      style: "Luxury Modern",
+      category: "Residential",
+      layout: "Open Plan",
+      location: "Bangalore, Whitefield",
+      pricing: "22",
+      bhk: "3 BHK",
+      scope: "Full Home Interior",
+      propertyType: "Villa",
+      size: "2200 sq.ft",
+      priceMin: 1800000,
+      priceMax: 2500000,
+    },
+    {
+      _id: "8",
+      title: "Studio Apartment",
+      projectName: "Prestige Lakeside",
+      imageUrl: "/assets/Compress-images/livingroom4.jpg",
+      style: "Scandinavian",
+      category: "Residential",
+      layout: "Compact",
+      location: "Pune, Hinjewadi",
+      pricing: "5",
+      bhk: "1 BHK",
+      scope: "Full Home Interior",
+      propertyType: "Studio",
+      size: "550 sq.ft",
+      priceMin: 350000,
+      priceMax: 550000,
+    },
+    {
+      _id: "9",
+      title: "Office Space Design",
+      projectName: "WeWork Tower",
+      imageUrl: "/assets/Compress-images/Home-Office.jpg",
+      style: "Industrial Modern",
+      category: "Commercial",
+      layout: "Open Plan",
+      location: "Mumbai, BKC",
+      pricing: "15",
+      bhk: "N/A",
+      scope: "Office Interior",
+      propertyType: "Office",
+      size: "2000 sq.ft",
+      priceMin: 1200000,
+      priceMax: 1800000,
+    },
+  ];
 
   const loadMoreProjects = useCallback(() => {
     setLoading(true);
@@ -189,24 +322,24 @@ const Services = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden text-primary-foreground py-20">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/assets/Compress-images/livingroom3.jpg"
-            className="h-full w-full object-cover"
-            alt=""
-          />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-primary/80 to-primary/40"></div>
-        </div>
+      <section className="relative min-h-[500px] md:min-h-[550px] overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(/assets/Compress-images/livingroom3.jpg)` }}
+        />
+        <div className="absolute inset-0 bg-black/60" />
 
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-6xl font-bold mb-6">Where Ideas Become Reality</h1>
-          <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
-            Comprehensive interior design and renovation solutions tailored to
-            your lifestyle and budget
-          </p>
+        <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col justify-center min-h-[500px] md:min-h-[550px]">
+          <div className="text-white max-w-xl">
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
+              Where Ideas Become{" "}
+              <span className="text-[#F5A623]">Reality</span>
+            </h1>
+            <p className="text-base md:text-lg opacity-90 font-dm-sans">
+              Comprehensive interior design and renovation solutions tailored to
+              your lifestyle and budget
+            </p>
+          </div>
         </div>
       </section>
 
@@ -292,7 +425,7 @@ const Services = () => {
                       </div>
                       <div className="flex justify-between">
                         <span className="font-medium">Price Range:</span>
-                        <span className="text-green-600 font-medium">₹{project.priceMin?.toLocaleString()} - ₹{project.priceMax?.toLocaleString()}</span>
+                        <span className="text-green-600 font-medium">₹{project.priceMin.toLocaleString()} - ₹{project.priceMax.toLocaleString()}</span>
                       </div>
 
                       <Button

@@ -290,237 +290,160 @@ animate(".card, .Card, .shadow-lg, .rounded-xl", {
     },
   ];
 
+  const [whatsappOptIn, setWhatsappOptIn] = useState(true);
+
   return (
     <div className="min-h-screen pt-20">
-      <section className="relative h-[600px] overflow-hidden">
-        <Swiper
-          modules={[Autoplay, Pagination, EffectFade]}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          effect="fade"
-          fadeEffect={{ crossFade: true }}
-          speed={1000}
-          loop
-          className="h-full"
-        >
-          {/* Slide 1 */}
-          <SwiperSlide>
-            {/* Background image */}
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${heroImage})` }}
-            />
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-primary/80 to-primary/40" />
-
-            <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-primary-foreground px-4">
-              <h1 className="text-3xl md:text-6xl font-bold mb-6">
-                Design Your Dream Home,
-                <br />
-                Hassle-Free
-              </h1>
-              <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
-                End-to-end interior design services from consultation to
-                installation
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="default"
-                  className="md:h-12 md:px-8"
-                  variant="secondary"
-                >
-                  <Link to="/contact">Book Free Consultation</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="default"
-                  variant="outline"
-                  className="md:h-12 md:px-8 bg-background/10 text-primary-foreground border-primary-foreground/20 hover:bg-background/20"
-                >
-                  <Link to="/portfolio">View Our Designs</Link>
-                </Button>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/* Slide 2 */}
-          <SwiperSlide>
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${kitchenImage})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-primary/80 to-primary/40" />
-
-            <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-primary-foreground px-4">
-              <h1 className="text-3xl md:text-6xl font-bold mb-6">
-                Modern Interiors for Modern Living
-              </h1>
-              <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
-                Premium designs crafted to reflect your lifestyle
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="default"
-                  className="md:h-12 md:px-8"
-                  variant="secondary"
-                >
-                  <Link to="/contact">Book Free Consultation</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="default"
-                  variant="outline"
-                  className="md:h-12 md:px-8 bg-background/10 text-primary-foreground border-primary-foreground/20 hover:bg-background/20"
-                >
-                  <Link to="/portfolio">View Our Designs</Link>
-                </Button>
-              </div>
-            </div>
-          </SwiperSlide>
-
-          {/* Slide 3 */}
-          <SwiperSlide>
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${livingRoomImage})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-primary/80 to-primary/40" />
-
-            <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-primary-foreground px-4">
-              <h1 className="text-3xl md:text-6xl font-bold mb-6">
-                Luxury Spaces Made Affordable
-              </h1>
-              <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
-                High-end interiors that fit your budget
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="default"
-                  className="md:h-12 md:px-8"
-                  variant="secondary"
-                >
-                  <Link to="/contact">Book Free Consultation</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="default"
-                  variant="outline"
-                  className="md:h-12 md:px-8 bg-background/10 text-primary-foreground border-primary-foreground/20 hover:bg-background/20"
-                >
-                  <Link to="/portfolio">View Our Designs</Link>
-                </Button>
-              </div>
-            </div>
-          </SwiperSlide>
-        </Swiper>
-      </section>
-      {/* contact form */}
-      <section className="relative py-6 md:py-16 overflow-hidden">
+      {/* Hero with Lead Form */}
+      <section className="relative min-h-[500px] md:min-h-[550px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bedroomImage})` }}
+          style={{ backgroundImage: `url(${heroImage})` }}
         />
-        <div className="absolute inset-0 bg-amber-50/90" />
-        <div className="container mx-auto px-2 md:px-4 relative z-10">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-lg md:text-4xl font-bold text-center mb-2 md:mb-4">
-              Get Your Free Consultation
-            </h2>
-            <p className="text-center text-xs md:text-base text-muted-foreground mb-3 md:mb-8 font-dm-sans">
-              Fill out the form below and our design experts will get back to
-              you within 24 hours
-            </p>
+        <div className="absolute inset-0 bg-black/60" />
 
-            <Card className="p-2 md:p-6">
+        <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+          {/* Left — Heading */}
+          <div className="flex-1 text-white max-w-xl">
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
+              Interior Designers in{" "}
+              <span className="text-[#F5A623]">Mumbai</span>
+            </h1>
+            <p className="text-base md:text-lg opacity-90 font-dm-sans">
+              Hassle-free home interiors guaranteed with our best interior
+              designers in Mumbai
+            </p>
+          </div>
+
+          {/* Right — Lead Form Card */}
+          <div className="w-full max-w-md">
+            <Card className="p-6 md:p-8 shadow-xl bg-white">
+              <h2 className="text-xl md:text-2xl font-bold mb-6">
+                Designs for Every Budget
+              </h2>
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  const formData = new FormData(e.target as HTMLFormElement);
-                  const countryCode = formData.get("countryCode");
-                  const phone = formData.get("phone");
+                  const fd = new FormData(e.target as HTMLFormElement);
                   try {
-                    const response = await fetch(
+                    const res = await fetch(
                       "https://super-disco-the-designer-monk-production.up.railway.app/api/leads",
                       {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                          name: formData.get("name"),
+                          name: fd.get("heroName"),
                           email: "noemail@provided.com",
-                          phone: `${countryCode}${phone}`,
-                          message: `Pin Code: ${formData.get("pincode")}`,
-                          source: "Home Page Consultation",
+                          phone: `+91${fd.get("heroPhone")}`,
+                          message: `WhatsApp: ${whatsappOptIn ? "Yes" : "No"}`,
+                          source: "Hero Lead Form",
                         }),
                       }
                     );
-                    if (response.ok) {
-                      alert("Consultation request submitted successfully!");
+                    if (res.ok) {
+                      alert("We'll get back to you shortly!");
                       (e.target as HTMLFormElement).reset();
                     }
-                  } catch (error) {
-                    alert("Failed to submit request. Please try again.");
+                  } catch {
+                    alert("Something went wrong. Please try again.");
                   }
                 }}
-                className="space-y-4 md:space-y-6"
+                className="space-y-4"
               >
-                <div>
+                <input
+                  name="heroName"
+                  type="text"
+                  placeholder="Name"
+                  required
+                  className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8956C] font-dm-sans"
+                />
+                <div className="flex border border-border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#C8956C]">
+                  <span className="flex items-center gap-1 px-3 bg-muted text-sm font-medium border-r border-border">
+                    🇮🇳 +91
+                  </span>
                   <input
-                    name="name"
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
-                    required
-                  />
-                </div>
-
-                <div className="flex gap-2">
-                  <select
-                    name="countryCode"
-                    className="p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans bg-white text-sm md:text-base"
-                  >
-                    <option value="+91">🇮🇳 +91</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+971">🇦🇪 +971</option>
-                    <option value="+65">🇸🇬 +65</option>
-                  </select>
-
-                  <input
-                    name="phone"
+                    name="heroPhone"
                     type="tel"
-                    placeholder="Contact No"
-                    className="flex-1 p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
+                    placeholder="Phone number"
                     required
+                    className="flex-1 p-3 focus:outline-none font-dm-sans"
                   />
                 </div>
-
-                <div>
+                <label className="flex items-center gap-2 cursor-pointer text-sm">
                   <input
-                    name="pincode"
-                    type="text"
-                    placeholder="Pin Code"
-                    className="w-full p-3 md:p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary font-dm-sans"
-                    required
+                    type="checkbox"
+                    checked={whatsappOptIn}
+                    onChange={() => setWhatsappOptIn(!whatsappOptIn)}
+                    className="w-4 h-4 accent-[#C8956C] rounded"
                   />
-                </div>
-
+                  Send me updates on WhatsApp
+                </label>
                 <Button
                   type="submit"
-                  className="w-full py-3 text-base md:py-4 md:text-lg rounded-full button"
+                  className="w-full rounded-full text-base py-3 bg-primary hover:bg-primary/90 text-white"
                 >
-                  Get Free Consultation
+                  NEXT
                 </Button>
+                <p className="text-xs text-center text-muted-foreground">
+                  By submitting this form, you agree to the{" "}
+                  <a href="#" className="text-[#C8956C] underline">privacy policy</a>{" "}
+                  &amp;{" "}
+                  <a href="#" className="text-[#C8956C] underline">terms and conditions</a>
+                </p>
               </form>
             </Card>
           </div>
         </div>
       </section>
 
+
+
+      {/* Interior Design Info Section */}
+      <section className="py-12 md:py-16 bg-[#FFFCF5]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-center mb-3 text-gray-800">
+            Why Interior Design Matters
+          </h2>
+          <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto font-dm-sans">
+            A well-designed space isn't just about aesthetics — it transforms how you live, work, and feel every day.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#FFCDC9]/50 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-full bg-[#FD7979] flex items-center justify-center mb-4">
+                <span className="text-white text-xl">🏠</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2 text-gray-800">Maximize Your Space</h3>
+              <p className="text-sm text-gray-600 font-dm-sans">
+                Smart layouts and modular solutions make even compact homes feel spacious, functional, and clutter-free.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#FFCDC9]/50 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-full bg-[#FDACAC] flex items-center justify-center mb-4">
+                <span className="text-white text-xl">🎨</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2 text-gray-800">Reflect Your Personality</h3>
+              <p className="text-sm text-gray-600 font-dm-sans">
+                From color palettes to furniture choices, every detail is curated to match your unique taste and lifestyle.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#FFCDC9]/50 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-full bg-[#FFCDC9] flex items-center justify-center mb-4">
+                <span className="text-xl">💰</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2 text-gray-800">Add Value to Your Home</h3>
+              <p className="text-sm text-gray-600 font-dm-sans">
+                Professional interiors boost property value by up to 20%, making it a smart investment for the future.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us - Section */}
-      <section className="py-7 bg-[#5F8F9F] overflow-hidden">
+      <section className="py-7 bg-[#3d1525] overflow-hidden">
         <div className="container mx-auto px-4 rounded-md">
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-4 text-white">
             Why Choose Us
@@ -540,9 +463,9 @@ animate(".card, .Card, .shadow-lg, .rounded-xl", {
               {reasons.map((reason, index) => (
                 <Card
                   key={index}
-                  className="p-6 text-center hover:shadow-lg transition-shadow w-full md:w-[280px] bg-primary/10 rounded-2xl"
+                  className="p-6 text-center hover:shadow-lg transition-shadow w-full md:w-[280px] bg-white/10 rounded-2xl border-0"
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-petal-rouge mb-4">
                     <reason.icon className="text-white" size={32} />
                   </div>
 
@@ -560,12 +483,12 @@ animate(".card, .Card, .shadow-lg, .rounded-xl", {
 
       {/* Interior Design Inspirations */}
 
-      <section className="w-full py-6 bg-gray-300/40">
+      <section className="w-full py-6 bg-soft-blush">
         <div className="mx-auto  rounded-3xl p-5 ">
           <h2 className="flex justify-center text-2xl md:text-4xl font-bold text-left mb-4">
             Inspiration for home interior designs
           </h2>
-          <p className="text-sm flex justify-center text-gray-600 mb-4 pt-3">
+          <p className="text-sm flex justify-center text-muted-foreground mb-4 pt-3">
             Give your home a new look with these interior design ideas curated
             for you
           </p>
@@ -575,125 +498,125 @@ animate(".card, .Card, .shadow-lg, .rounded-xl", {
             <div className="grid grid-cols-4 gap-3 w-[850px]">
               {/* FIRST ROW */}
 
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("BEDROOM")}
                   src={dsc06643}
                   className="w-full h-full object-cover"
                 />
-                <span className="absolute  bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
+                <span className="absolute  bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur flex sm:bottom-100">
                   Master Bedroom
                 </span>
               </div>
 
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("FALSE CEILING")}
                   src="/assets/Compress-images/false-ceiling.jpg"
                   className="w-full h-full object-cover"
                 />
 
-                <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                   False Ceiling
                 </span>
               </div>
 
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("HOME OFFICE")}
                   src="/assets/Compress-images/Home-Office.jpg"
                   className="w-full h-full object-cover"
                 />
 
-                <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                   Home Office
                 </span>
               </div>
 
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("FOYER ROOM")}
                   src="/assets/Compress-images/Foyer-Room.jpg"
                   className="w-full h-full object-cover"
                 />
 
-                <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                   Foyer Room
                 </span>
               </div>
 
               {/* SECOND ROW */}
               <div className="col-span-4 flex gap-3">
-                <div className="w-[420px] h-[200px] bg-gray-300 rounded-xl relative overflow-hidden">
+                <div className="w-[420px] h-[200px] bg-pastel-pink/30 rounded-xl relative overflow-hidden">
                   <img
                     onClick={() => goToPortfolio("KITCHEN")}
                     className="h-full w-full object-cover"
                     src={dsc06769}
                   />
 
-                  <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                  <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                     Kitchen Designs
                   </span>
                 </div>
 
-                <div className="w-[420px] h-[200px] bg-gray-300 rounded-xl relative overflow-hidden">
+                <div className="w-[420px] h-[200px] bg-pastel-pink/30 rounded-xl relative overflow-hidden">
                   <img
                     onClick={() => goToPortfolio("LIVING ROOM")}
                     className="h-full w-full object-cover"
                     src="/assets/Compress-images/livingroom7.jpg"
                   />
 
-                  <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                  <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                     Living Room
                   </span>
                 </div>
               </div>
 
               {/* THIRD ROW */}
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("DINING ROOM")}
                   src={dsc06788}
                   className="w-full h-full object-cover"
                 />
 
-                <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                   Dining Room
                 </span>
               </div>
 
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("KIDS ROOM")}
                   src="/assets/Compress-images/bedroom4.jpg"
                   className="w-full h-full object-cover"
                 />
 
-                <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                   Kids Room
                 </span>
               </div>
 
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("WARDROBE DESIGN")}
                   src="/assets/Compress-images/wardrobe.jpg"
                   className="w-full h-full object-cover"
                 />
 
-                <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                   Wardrobe Designs
                 </span>
               </div>
 
-              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-gray-200">
+              <div className="relative w-[200px] h-[200px] rounded-xl overflow-hidden bg-pastel-pink/30">
                 <img
                   onClick={() => goToPortfolio("ALL")}
                   src="/assets/Compress-images/house.jpg"
                   className="w-full h-full object-cover"
                 />
 
-                <span className="absolute bottom-2 left-2 bg-gray-700/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
+                <span className="absolute bottom-2 left-2 bg-[#3d1525]/80 text-white text-xs px-3 py-1 rounded-md backdrop-blur">
                   Homes by Monks
                 </span>
               </div>
@@ -947,7 +870,7 @@ animate(".card, .Card, .shadow-lg, .rounded-xl", {
       </section>
 
       {/* Trusted Partners */}
-      <section className="py-10 md:py-20 bg-gray-300/40">
+      <section className="py-10 md:py-20 bg-[#f8fafc]">
         <div className="container mx-auto px-4 ">
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-4">
             Our Trusted Partners
@@ -1105,7 +1028,7 @@ animate(".card, .Card, .shadow-lg, .rounded-xl", {
       </section>
 
       {/* CTA Banner */}
-      <section className="relative py-20  bg-primary text-primary-foreground overflow-hidden">
+      {/* <section className="relative py-20  bg-primary text-primary-foreground overflow-hidden">
         <video
           className="absolute inset-0 w-full h-full object-cover"
           autoPlay
@@ -1132,10 +1055,10 @@ animate(".card, .Card, .shadow-lg, .rounded-xl", {
             <Link to="/contact">Get Started Now</Link>
           </Button>
         </div>
-      </section>
+      </section> */}
 
       {/* FAQs */}
-      <section className="py-16 bg-gray-300/40">
+      <section className="py-16 bg-[#f8fafc]">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-4">
             Frequently Asked Questions

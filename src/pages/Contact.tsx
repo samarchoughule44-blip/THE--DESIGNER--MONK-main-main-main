@@ -1,73 +1,10 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    city: "",
-    projectType: "",
-    message: "",
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('https://super-disco-the-designer-monk-production.up.railway.app/api/leads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: `City: ${formData.city}\nProject Type: ${formData.projectType}\nMessage: ${formData.message}`,
-          source: 'Contact Page'
-        })
-      });
-      
-      if (response.ok) {
-        toast({
-          title: "Message Sent!",
-          description: "We'll get back to you within 24 hours.",
-        });
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          city: "",
-          projectType: "",
-          message: "",
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: "Failed to send message. Please try again.",
-          variant: "destructive"
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive"
-      });
-    }
-  };
-
-  const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
+  const [whatsappOptIn, setWhatsappOptIn] = useState(true);
 
   const contactInfo = [
     {
@@ -98,138 +35,102 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-20">
-
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6">Get In Touch</h1>
-          <p className="text-xl max-w-3xl mx-auto opacity-95">
-            Ready to transform your space? Let's discuss your project and bring your vision to life
-          </p>
-        </div>
-      </section>
+      <section className="relative min-h-[500px] md:min-h-[550px] overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(/assets/Compress-images/livingroom2.jpg)` }}
+        />
+        <div className="absolute inset-0 bg-black/60" />
 
-      {/* Form and Map Section */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <Card className="p-8">
-              <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <Label htmlFor="name">Full Name *</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => handleChange("name", e.target.value)}
+        <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+          {/* Left — Heading */}
+          <div className="flex-1 text-white max-w-xl">
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
+              Get In <span className="text-[#F5A623]">Touch</span>
+            </h1>
+            <p className="text-base md:text-lg opacity-90 font-dm-sans">
+              Ready to transform your space? Let's discuss your project and bring your vision to life
+            </p>
+          </div>
+
+          {/* Right — Lead Form Card (same as Home) */}
+          <div className="w-full max-w-md">
+            <Card className="p-6 md:p-8 shadow-xl bg-white">
+              <h2 className="text-xl md:text-2xl font-bold mb-6">
+                Book Free Consultation
+              </h2>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const fd = new FormData(e.target as HTMLFormElement);
+                  try {
+                    const res = await fetch(
+                      "https://super-disco-the-designer-monk-production.up.railway.app/api/leads",
+                      {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          name: fd.get("name"),
+                          email: "noemail@provided.com",
+                          phone: `+91${fd.get("phone")}`,
+                          message: `WhatsApp: ${whatsappOptIn ? "Yes" : "No"}`,
+                          source: "Contact Page",
+                        }),
+                      }
+                    );
+                    if (res.ok) {
+                      alert("We'll get back to you shortly!");
+                      (e.target as HTMLFormElement).reset();
+                    }
+                  } catch {
+                    alert("Something went wrong. Please try again.");
+                  }
+                }}
+                className="space-y-4"
+              >
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  required
+                  className="w-full p-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8956C] font-dm-sans"
+                />
+                <div className="flex border border-border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#C8956C]">
+                  <span className="flex items-center gap-1 px-3 bg-muted text-sm font-medium border-r border-border">
+                    🇮🇳 +91
+                  </span>
+                  <input
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone number"
                     required
-                    placeholder="Enter your full name"
-                    className="mt-2"
+                    className="flex-1 p-3 focus:outline-none font-dm-sans"
                   />
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleChange("phone", e.target.value)}
-                      required
-                      placeholder="Enter your phone number"
-                      className="mt-2"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleChange("email", e.target.value)}
-                      required
-                      placeholder="Enter your email address"
-                      className="mt-2"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="city">City *</Label>
-                    <Input
-                      id="city"
-                      value={formData.city}
-                      onChange={(e) => handleChange("city", e.target.value)}
-                      required
-                      placeholder="Enter your city"
-                      className="mt-2"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="projectType">Project Type *</Label>
-                    <Select
-                      value={formData.projectType}
-                      onValueChange={(value) => handleChange("projectType", value)}
-                      required
-                    >
-                      <SelectTrigger className="mt-2 border border-gray-400">
-                        <SelectValue placeholder="Select project type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="full-home">Full Home Interior</SelectItem>
-                        <SelectItem value="kitchen">Modular Kitchen</SelectItem>
-                        <SelectItem value="living">Living Room</SelectItem>
-                        <SelectItem value="bedroom">Bedroom</SelectItem>
-                        <SelectItem value="furniture">Custom Furniture</SelectItem>
-                        <SelectItem value="renovation">Renovation</SelectItem>
-                        <SelectItem value="consultation">Just Consultation</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div>
-                  <Label  htmlFor="message">Your Message</Label>
-                  <Textarea
-                  
-                    id="message"
-                    value={formData.message}
-                    onChange={(e) => handleChange("message", e.target.value)}
-                    placeholder="Write your message here..."
-                    className="mt-2 min-h-[120px] border border-gray-400"
+                <label className="flex items-center gap-2 cursor-pointer text-sm">
+                  <input
+                    type="checkbox"
+                    checked={whatsappOptIn}
+                    onChange={() => setWhatsappOptIn(!whatsappOptIn)}
+                    className="w-4 h-4 accent-[#C8956C] rounded"
                   />
-                </div>
-
-                <Button type="submit" size="lg" className="w-full">
-                  Submit Inquiry
+                  Send me updates on WhatsApp
+                </label>
+                <Button
+                  type="submit"
+                  className="w-full rounded-full text-base py-3 bg-primary hover:bg-primary/90 text-white"
+                >
+                  SUBMIT
                 </Button>
+                <p className="text-xs text-center text-muted-foreground">
+                  By submitting this form, you agree to the{" "}
+                  <a href="#" className="text-[#C8956C] underline">privacy policy</a>{" "}
+                  &amp;{" "}
+                  <a href="#" className="text-[#C8956C] underline">terms and conditions</a>
+                </p>
               </form>
             </Card>
-
-            {/* Map */}
-            <div className="space-y-6">
-              <Card className="p-8">
-                <h2 className="text-3xl font-bold mb-4">Visit Our Office</h2>
-                <p className="text-muted-foreground mb-6">
-                  Drop by our design studio to explore material samples, view our portfolio, and meet our team. We recommend scheduling an appointment for personalized attention.
-                </p>
-                <div className="aspect-video bg-muted rounded-lg overflow-hidden">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709658!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Office Location"
-                  />
-                </div>
-              </Card>
-            </div>
           </div>
         </div>
       </section>
@@ -252,9 +153,31 @@ const Contact = () => {
         </div>
       </section>
 
-      
+      {/* Map Section */}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4">
+          <Card className="p-8 max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4">Visit Our Office</h2>
+            <p className="text-muted-foreground mb-6">
+              Drop by our design studio to explore material samples, view our portfolio, and meet our team.
+            </p>
+            <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709658!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Office Location"
+              />
+            </div>
+          </Card>
+        </div>
+      </section>
 
-      {/* FAQ Section */}
+      {/* Quick Contact */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">

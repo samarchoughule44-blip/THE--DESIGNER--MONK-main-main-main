@@ -145,23 +145,23 @@ useEffect(() => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden text-primary-foreground py-20">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/assets/Compress-images/team.jpg"
-            className="h-full w-full object-cover"
-            alt=""
-          />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-primary/80 to-primary/40"></div>
-        </div>
+      <section className="relative min-h-[500px] md:min-h-[550px] overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(/assets/Compress-images/team.jpg)` }}
+        />
+        <div className="absolute inset-0 bg-black/60" />
 
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-6xl font-bold mb-6">Ideas to Transform Your Living Space</h1>
-          <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto opacity-95 font-dm-sans">
-            Explore our collection of beautifully designed spaces that reflect our commitment to excellence
-          </p>
+        <div className="relative z-10 container mx-auto px-4 py-12 md:py-20 flex flex-col justify-center min-h-[500px] md:min-h-[550px]">
+          <div className="text-white max-w-xl">
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
+              Ideas to Transform Your{" "}
+              <span className="text-[#F5A623]">The Designer Monk</span>
+            </h1>
+            <p className="text-base md:text-lg opacity-90 font-dm-sans">
+              Explore our collection of beautifully designed spaces that reflect our commitment to excellence
+            </p>
+          </div>
         </div>
       </section>
 
